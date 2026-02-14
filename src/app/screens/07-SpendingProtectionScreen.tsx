@@ -77,7 +77,7 @@ export function SpendingProtectionScreenGood() {
           </div>
           <div>
             <h1 className="text-2xl font-bold text-gray-900">{t('loadProtection')}</h1>
-            <p className="text-sm text-gray-600">{t('loadProtectionDesc')}</p>
+            <p className="text-sm text-gray-600">{t('protectionSubtitle')}</p>
           </div>
         </div>
       </div>

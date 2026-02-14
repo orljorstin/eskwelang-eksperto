@@ -5,7 +5,7 @@ import { useT } from '../../context/LanguageContext';
 
 export function SettingsScreenGood() {
   const navigate = useNavigate();
-  const { profiles } = useApp();
+  const { profiles, logout } = useApp();
   const { t } = useT();
 
   const childCount = profiles.filter(p => p.role === 'child').length;
@@ -124,10 +124,10 @@ export function SettingsScreenGood() {
             </div>
           </div>
 
-          {/* Danger zone - clearly marked */}
+          {/* Advanced section */}
           <div>
             <h2 className="text-xs font-semibold text-red-600 uppercase tracking-wider mb-3 px-1">
-              Advanced
+              {t('advanced')}
             </h2>
             <div className="bg-white rounded-xl overflow-hidden shadow-sm border-2 border-red-200">
               <button
@@ -146,8 +146,21 @@ export function SettingsScreenGood() {
             </div>
           </div>
 
+          {/* Logout Button */}
+          <button
+            onClick={() => {
+              if (window.confirm("Are you sure you want to logout?")) {
+                logout();
+                navigate('/login');
+              }
+            }}
+            className="w-full py-4 text-center text-red-600 font-medium hover:bg-red-50 rounded-xl transition-colors border border-transparent hover:border-red-100"
+          >
+            {t('logout')}
+          </button>
+
           {/* App info */}
-          <div className="pt-4 text-center">
+          <div className="pt-2 text-center pb-8">
             <p className="text-xs text-gray-500">Eskwelang-Eksperto v1.0</p>
             <p className="text-xs text-gray-400 mt-1">Para sa pamilya 💙</p>
           </div>

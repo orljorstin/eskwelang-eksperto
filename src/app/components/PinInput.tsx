@@ -46,7 +46,7 @@ export function PinInput({
                     pattern="\d*"
                     inputMode="numeric"
                     autoFocus={autoFocus}
-                    className={`w-full pl-12 pr-12 py-3.5 bg-gray-50 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all outline-none font-mono tracking-widest text-lg ${error ? 'border-red-500 bg-red-50' : 'border-gray-200'
+                    className={`w-full pl-12 pr-12 py-3.5 bg-gray-50 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all outline-none font-mono tracking-widest text-lg text-gray-900 placeholder-gray-400 ${error ? 'border-red-500 bg-red-50' : 'border-gray-200'
                         }`}
                     placeholder={placeholder}
                 />

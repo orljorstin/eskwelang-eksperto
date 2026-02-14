@@ -65,7 +65,7 @@ export function LauncherSettingsScreen() {
                             <div className="flex-1">
                                 <h3 className="font-semibold text-gray-900">{app.name}</h3>
                                 <p className={`text-xs ${app.allowed ? 'text-green-600' : 'text-gray-500'}`}>
-                                    {app.allowed ? t('allowed') : t('blocked')}
+                                    {app.allowed ? "Allowed" : "Blocked"}
                                 </p>
                             </div>
 

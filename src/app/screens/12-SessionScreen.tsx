@@ -158,21 +158,25 @@ export function SessionScreen() {
                         <div className="text-center text-4xl font-bold text-teal-600 mb-4">
                             {duration} <span className="text-base text-gray-400 font-normal">min</span>
                         </div>
-                        <input
-                            type="range"
-                            min="5"
-                            max="120"
-                            step="5"
-                            value={duration}
-                            onChange={(e) => setDuration(Number(e.target.value))}
-                            className="w-full h-3 bg-gray-200 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-teal-600"
-                        />
+
+                        <div className="flex items-center gap-4">
+                            <span className="text-xs font-bold text-gray-400">5m</span>
+                            <div className="flex-1">
+                                <input
+                                    type="range"
+                                    min="5"
+                                    max="120"
+                                    step="5"
+                                    value={duration}
+                                    onChange={(e) => setDuration(Number(e.target.value))}
+                                    className="w-full h-3 bg-gray-200 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-teal-600 mb-1"
+                                />
+                            </div>
+                            <span className="text-xs font-bold text-gray-400">2h</span>
+                        </div>
+
                         <div className="flex justify-between mt-2">
                             <button onClick={() => setDuration(Math.max(5, duration - 1))} className="px-3 py-1 bg-gray-200 rounded-lg text-sm font-bold text-gray-700 hover:bg-gray-300">-1m</button>
-                            <div className="flex gap-4 text-xs text-gray-500">
-                                <span>5m</span>
-                                <span>2h</span>
-                            </div>
                             <button onClick={() => setDuration(Math.min(120, duration + 1))} className="px-3 py-1 bg-gray-200 rounded-lg text-sm font-bold text-gray-700 hover:bg-gray-300">+1m</button>
                         </div>
 
@@ -302,7 +306,7 @@ export function SessionScreen() {
                     <CheckCircle className="w-12 h-12 text-white" />
                 </div>
                 <h1 className="text-4xl font-bold mb-2">{t('greatJob')}</h1>
-                <p className="text-teal-100 mb-8">{t('youFocusedFor')} {duration} {t('minutes')}.</p>
+                <p className="text-teal-100 mb-8">{t('youFocusedFor')} {duration} min.</p>
 
                 <div className="grid grid-cols-2 gap-4 w-full max-w-xs mb-8">
                     <div className="bg-white/10 p-4 rounded-xl">
