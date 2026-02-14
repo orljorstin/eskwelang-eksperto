@@ -1,12 +1,23 @@
-import { Globe, Users, Smartphone, CircleHelp, Shield, ChevronRight, TriangleAlert } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Globe, Users, Smartphone, CircleHelp, Shield, ChevronRight, TriangleAlert, ArrowLeft } from 'lucide-react';
 
 export function SettingsScreenGood() {
+  const navigate = useNavigate();
+
   return (
     <div className="h-full bg-gray-50 flex flex-col">
       {/* Header */}
-      <div className="px-6 py-4 bg-white border-b border-gray-200">
-        <h1 className="text-2xl font-bold text-gray-900">Settings</h1>
-        <p className="text-sm text-gray-600 mt-1">I-manage ang app settings</p>
+      <div className="px-6 py-4 bg-white border-b border-gray-200 flex items-center gap-4">
+        <button
+          onClick={() => navigate(-1)}
+          className="p-2 -ml-2 hover:bg-gray-100 rounded-full transition-colors"
+        >
+          <ArrowLeft className="w-6 h-6 text-gray-700" />
+        </button>
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Settings</h1>
+          <p className="text-sm text-gray-600 mt-1">I-manage ang app settings</p>
+        </div>
       </div>
 
       {/* Content */}
@@ -19,7 +30,10 @@ export function SettingsScreenGood() {
               General
             </h2>
             <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200">
-              <button className="w-full px-4 py-4 flex items-center gap-4 hover:bg-gray-50 transition-colors border-b border-gray-100">
+              <button
+                onClick={() => navigate('/settings/language')}
+                className="w-full px-4 py-4 flex items-center gap-4 hover:bg-gray-50 transition-colors border-b border-gray-100"
+              >
                 <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
                   <Globe className="w-5 h-5 text-blue-600" />
                 </div>
@@ -30,7 +44,10 @@ export function SettingsScreenGood() {
                 <ChevronRight className="w-5 h-5 text-gray-400" />
               </button>
 
-              <button className="w-full px-4 py-4 flex items-center gap-4 hover:bg-gray-50 transition-colors">
+              <button
+                onClick={() => navigate('/profile-management')}
+                className="w-full px-4 py-4 flex items-center gap-4 hover:bg-gray-50 transition-colors"
+              >
                 <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
                   <Users className="w-5 h-5 text-purple-600" />
                 </div>
@@ -49,7 +66,10 @@ export function SettingsScreenGood() {
               Protection Settings
             </h2>
             <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200">
-              <button className="w-full px-4 py-4 flex items-center gap-4 hover:bg-gray-50 transition-colors border-b border-gray-100">
+              <button
+                onClick={() => navigate('/settings/launcher')}
+                className="w-full px-4 py-4 flex items-center gap-4 hover:bg-gray-50 transition-colors border-b border-gray-100"
+              >
                 <div className="w-10 h-10 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0">
                   <Smartphone className="w-5 h-5 text-teal-600" />
                 </div>
@@ -60,7 +80,10 @@ export function SettingsScreenGood() {
                 <ChevronRight className="w-5 h-5 text-gray-400" />
               </button>
 
-              <button className="w-full px-4 py-4 flex items-center gap-4 hover:bg-gray-50 transition-colors">
+              <button
+                onClick={() => navigate('/spending-protection')}
+                className="w-full px-4 py-4 flex items-center gap-4 hover:bg-gray-50 transition-colors"
+              >
                 <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
                   <Shield className="w-5 h-5 text-amber-600" />
                 </div>
@@ -79,7 +102,10 @@ export function SettingsScreenGood() {
               Support
             </h2>
             <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200">
-              <button className="w-full px-4 py-4 flex items-center gap-4 hover:bg-gray-50 transition-colors">
+              <button
+                onClick={() => navigate('/settings/help')}
+                className="w-full px-4 py-4 flex items-center gap-4 hover:bg-gray-50 transition-colors"
+              >
                 <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
                   <CircleHelp className="w-5 h-5 text-green-600" />
                 </div>
@@ -98,7 +124,10 @@ export function SettingsScreenGood() {
               Advanced
             </h2>
             <div className="bg-white rounded-xl overflow-hidden shadow-sm border-2 border-red-200">
-              <button className="w-full px-4 py-4 flex items-center gap-4 hover:bg-red-50 transition-colors">
+              <button
+                onClick={() => navigate('/settings/advanced')}
+                className="w-full px-4 py-4 flex items-center gap-4 hover:bg-red-50 transition-colors"
+              >
                 <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
                   <TriangleAlert className="w-5 h-5 text-red-600" />
                 </div>

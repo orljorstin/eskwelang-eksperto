@@ -15,6 +15,7 @@ import { SettingsScreenGood } from './screens/10-SettingsScreen';
 import { CreateProfileScreen } from './screens/11-CreateProfileScreen';
 import { SessionScreen } from './screens/12-SessionScreen';
 import { MobileFrame } from './components/MobileFrame';
+import { PlaceholderScreen } from './screens/PlaceholderScreen';
 
 // Protect routes that require parent authentication
 function ProtectedRoute() {
@@ -77,6 +78,13 @@ export default function App() {
               <Route path="/spending-protection" element={<SpendingProtectionScreenGood />} />
               <Route path="/blocked" element={<BlockedActionScreenGood />} />
               <Route path="/create-profile" element={<CreateProfileScreen />} />
+              <Route path="/create-profile" element={<CreateProfileScreen />} />
+
+              {/* Settings Sub-pages */}
+              <Route path="/settings/language" element={<PlaceholderScreen title="Language Settings" description="Change app language and regional settings." />} />
+              <Route path="/settings/launcher" element={<PlaceholderScreen title="Launcher Settings" description="Configure default apps and home screen layout." />} />
+              <Route path="/settings/help" element={<PlaceholderScreen title="Help & Support" description="Tutorials, FAQs, and Customer Support." />} />
+              <Route path="/settings/advanced" element={<PlaceholderScreen title="Advanced Settings" description="System controls and dangerous actions." />} />
             </Route>
 
             {/* Child Routes (Special case, might need different protection later) */}
