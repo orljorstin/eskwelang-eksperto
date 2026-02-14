@@ -45,7 +45,7 @@ export function SettingsScreenGood() {
                 </div>
                 <div className="flex-1 text-left">
                   <p className="font-medium text-gray-900">{t('language')}</p>
-                  <p className="text-sm text-gray-600">Taglish / English</p>
+                  <p className="text-sm text-gray-600">Taglish / English / Bisaya / etc.</p>
                 </div>
                 <ChevronRight className="w-5 h-5 text-gray-400" />
               </button>
