@@ -29,8 +29,8 @@ export function LanguageScreen() {
             </div>
 
             {/* Content */}
-            <div className="p-6">
-                <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200">
+            <div className="flex-1 p-6 relative">
+                <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200 mb-20">
                     {LANGUAGES.map((lang, idx) => (
                         <button
                             key={lang.code}
@@ -53,9 +53,19 @@ export function LanguageScreen() {
                     ))}
                 </div>
 
-                <p className="mt-4 text-xs text-center text-gray-500">
+                <p className="text-xs text-center text-gray-500 mb-24">
                     More languages coming soon!
                 </p>
+
+                {/* Floating Save Button */}
+                <div className="absolute bottom-6 left-6 right-6">
+                    <button
+                        onClick={() => navigate(-1)}
+                        className="w-full bg-teal-600 text-white font-bold py-3.5 rounded-xl shadow-lg active:scale-95 transition-all hover:bg-teal-700"
+                    >
+                        Apply Changes
+                    </button>
+                </div>
             </div>
         </div>
     );

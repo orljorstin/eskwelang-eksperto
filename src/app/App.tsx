@@ -87,7 +87,7 @@ export default function App() {
               {/* Settings Sub-pages */}
               <Route path="/settings/language" element={<LanguageScreen />} />
               <Route path="/settings/launcher" element={<LauncherSettingsScreen />} />
-              <Route path="/settings/support" element={<SupportScreen />} />
+              <Route path="/settings/help" element={<SupportScreen />} />
               <Route path="/settings/advanced" element={<AdvancedSettingsScreen />} />
             </Route>
 
