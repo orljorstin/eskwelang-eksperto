@@ -78,7 +78,6 @@ export default function App() {
               <Route path="/spending-protection" element={<SpendingProtectionScreenGood />} />
               <Route path="/blocked" element={<BlockedActionScreenGood />} />
               <Route path="/create-profile" element={<CreateProfileScreen />} />
-              <Route path="/create-profile" element={<CreateProfileScreen />} />
 
               {/* Settings Sub-pages */}
               <Route path="/settings/language" element={<PlaceholderScreen title="Language Settings" description="Change app language and regional settings." />} />

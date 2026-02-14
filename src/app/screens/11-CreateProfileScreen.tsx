@@ -27,7 +27,7 @@ export function CreateProfileScreen() {
                 role: 'child',
                 settings: { allowed_apps: [] } // Default empty settings
             });
-            navigate('/profiles'); // Go back to profile management
+            navigate('/profile-management'); // Go back to profile management
         } catch (error) {
             console.error('Failed to create profile:', error);
         } finally {
@@ -60,8 +60,8 @@ export function CreateProfileScreen() {
                                     type="button"
                                     onClick={() => setAvatar(a)}
                                     className={`w-14 h-14 text-3xl flex items-center justify-center rounded-full transition-all ${avatar === a
-                                            ? 'bg-teal-100 ring-4 ring-teal-500/30 scale-110'
-                                            : 'bg-gray-100 hover:bg-gray-200'
+                                        ? 'bg-teal-100 ring-4 ring-teal-500/30 scale-110'
+                                        : 'bg-gray-100 hover:bg-gray-200'
                                         }`}
                                 >
                                     {a}

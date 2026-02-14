@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Clock, BookOpen, Gamepad2, ShieldAlert, TrendingUp, Users, ArrowRight, UserPlus } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { useNavigate } from 'react-router-dom';
@@ -5,15 +6,25 @@ import { useNavigate } from 'react-router-dom';
 export function ParentDashboardScreenGood() {
   const { user, profiles } = useApp();
   const navigate = useNavigate();
+  const childProfiles = profiles.filter(p => p.role === 'child');
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  // Mock stats for now (In real app, calculate from sessions/audit_logs)
-  const todayStats = {
-    schoolTime: 0,
-    playTime: 0,
-    blockedAttempts: 0,
+  // Mock stats generator
+  const getStats = (childId: string) => ({
+    schoolTime: Math.floor(Math.random() * 60),
+    playTime: Math.floor(Math.random() * 60),
+  });
+
+  const nextChild = () => {
+    setActiveIndex(prev => (prev + 1) % childProfiles.length);
   };
 
-  const childProfiles = profiles.filter(p => p.role === 'child');
+  const prevChild = () => {
+    setActiveIndex(prev => (prev - 1 + childProfiles.length) % childProfiles.length);
+  };
+
+  const currentChild = childProfiles[activeIndex];
+  const stats = currentChild ? getStats(currentChild.id) : { schoolTime: 0, playTime: 0 };
 
   return (
     <div className="h-full bg-gray-50 flex flex-col">
@@ -29,14 +40,28 @@ export function ParentDashboardScreenGood() {
           </div>
         </div>
 
-        {/* Quick Profile Switcher / Status */}
+        {/* Carousel / Quick Switcher */}
         {childProfiles.length > 0 ? (
-          <div className="flex -space-x-2 overflow-hidden py-1">
-            {childProfiles.slice(0, 4).map((child) => (
-              <div key={child.id} className="inline-block h-10 w-10 rounded-full ring-2 ring-white bg-teal-200 flex items-center justify-center text-xl shadow-sm">
-                {child.avatar}
+          <div className="mt-4">
+            <div className="flex items-center justify-between">
+              <button onClick={prevChild} className="p-1 hover:bg-white/20 rounded-full">
+                <ArrowRight className="w-5 h-5 text-white rotate-180" />
+              </button>
+
+              <div className="flex flex-col items-center">
+                <div className="text-4xl mb-1">{currentChild.avatar}</div>
+                <span className="font-bold text-lg">{currentChild.name}</span>
               </div>
-            ))}
+
+              <button onClick={nextChild} className="p-1 hover:bg-white/20 rounded-full">
+                <ArrowRight className="w-5 h-5 text-white" />
+              </button>
+            </div>
+            <div className="flex justify-center gap-1 mt-2">
+              {childProfiles.map((_, idx) => (
+                <div key={idx} className={`w-1.5 h-1.5 rounded-full ${idx === activeIndex ? 'bg-white' : 'bg-white/40'}`} />
+              ))}
+            </div>
           </div>
         ) : (
           <button
@@ -84,7 +109,7 @@ export function ParentDashboardScreenGood() {
                   </div>
                 </div>
                 <p className="text-xs text-gray-500 font-medium">School Mode</p>
-                <p className="text-xl font-bold text-gray-900">{todayStats.schoolTime}m</p>
+                <p className="text-xl font-bold text-gray-900">{stats.schoolTime}m</p>
               </div>
 
               {/* Play time */}
@@ -95,7 +120,7 @@ export function ParentDashboardScreenGood() {
                   </div>
                 </div>
                 <p className="text-xs text-gray-500 font-medium">Play Time</p>
-                <p className="text-xl font-bold text-gray-900">{todayStats.playTime}m</p>
+                <p className="text-xl font-bold text-gray-900">{stats.playTime}m</p>
               </div>
             </div>
 
