@@ -15,7 +15,11 @@ import { SettingsScreenGood } from './screens/10-SettingsScreen';
 import { CreateProfileScreen } from './screens/11-CreateProfileScreen';
 import { SessionScreen } from './screens/12-SessionScreen';
 import { MobileFrame } from './components/MobileFrame';
-import { PlaceholderScreen } from './screens/PlaceholderScreen';
+
+import { LanguageScreen } from './screens/13-LanguageScreen';
+import { LauncherSettingsScreen } from './screens/14-LauncherSettingsScreen';
+import { SupportScreen } from './screens/15-SupportScreen';
+import { AdvancedSettingsScreen } from './screens/16-AdvancedSettingsScreen';
 
 // Protect routes that require parent authentication
 function ProtectedRoute() {
