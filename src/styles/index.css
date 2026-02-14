@@ -14,8 +14,4 @@ body,
     /* Match bg-gray-50 */
 }
 
-/* Safe area for mobile */
-body {
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
-}
+/* Safe area is handled by components */

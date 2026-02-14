@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Wallet, Shield, TriangleAlert, CircleCheck, Save } from 'lucide-react';
+import { Wallet, Shield, TriangleAlert, CircleCheck, Save, ArrowLeft } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { useNavigate } from 'react-router-dom';
 import { PinModal } from '../components/PinModal';
@@ -64,6 +64,12 @@ export function SpendingProtectionScreenGood() {
       {/* Header */}
       <div className="px-6 py-4 bg-white border-b border-gray-200">
         <div className="flex items-center gap-3 mb-2">
+          <button
+            onClick={() => navigate(-1)}
+            className="p-2 -ml-2 hover:bg-gray-100 rounded-full transition-colors"
+          >
+            <ArrowLeft className="w-6 h-6 text-gray-700" />
+          </button>
           <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-500 rounded-full flex items-center justify-center">
             <Wallet className="w-6 h-6 text-white" />
           </div>
