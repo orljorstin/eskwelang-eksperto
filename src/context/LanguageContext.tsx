@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 import { translations, errorMap } from '../i18n/translations';
 
-type Language = 'en' | 'tl';
+type Language = 'en' | 'tl' | 'ceb';
 
 interface LanguageContextType {
     language: Language;
