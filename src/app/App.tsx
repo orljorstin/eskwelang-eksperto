@@ -75,7 +75,7 @@ export default function App() {
               <Route path="/profile-management" element={<ProfileManagementScreenGood />} />
               <Route path="/profile-switcher" element={<ProfileSwitcherScreenGood />} />
               <Route path="/school-setup" element={<SchoolModeSetupScreenGood />} />
-              <Route path="/settings" element={<SettingsScreen />} />
+              <Route path="/settings" element={<SettingsScreenGood />} />
               <Route path="/spending-protection" element={<SpendingProtectionScreenGood />} />
               <Route path="/blocked" element={<BlockedActionScreenGood />} />
               <Route path="/create-profile" element={<CreateProfileScreen />} />
