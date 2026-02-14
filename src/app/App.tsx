@@ -14,7 +14,7 @@ import { ParentDashboardScreenGood } from './screens/09-ParentDashboardScreen';
 import { SettingsScreenGood } from './screens/10-SettingsScreen';
 import { CreateProfileScreen } from './screens/11-CreateProfileScreen';
 import { SessionScreen } from './screens/12-SessionScreen';
-import { SessionScreen } from './screens/12-SessionScreen';
+
 
 import { LanguageScreen } from './screens/13-LanguageScreen';
 import { LauncherSettingsScreen } from './screens/14-LauncherSettingsScreen';
