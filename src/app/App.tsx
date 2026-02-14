@@ -14,7 +14,7 @@ import { ParentDashboardScreenGood } from './screens/09-ParentDashboardScreen';
 import { SettingsScreenGood } from './screens/10-SettingsScreen';
 import { CreateProfileScreen } from './screens/11-CreateProfileScreen';
 import { SessionScreen } from './screens/12-SessionScreen';
-import { MobileFrame } from './components/MobileFrame';
+import { SessionScreen } from './screens/12-SessionScreen';
 
 import { LanguageScreen } from './screens/13-LanguageScreen';
 import { LauncherSettingsScreen } from './screens/14-LauncherSettingsScreen';
@@ -22,7 +22,7 @@ import { SupportScreen } from './screens/15-SupportScreen';
 import { AdvancedSettingsScreen } from './screens/16-AdvancedSettingsScreen';
 
 // Protect routes that require parent authentication
-function ProtectedRoute() {
+function ProtectedRoute({ requireParent }: { requireParent?: boolean }) {
   const { isAuthenticated, user, isLoading } = useApp();
 
   if (isLoading) return <div className="h-screen flex items-center justify-center">Loading...</div>;
