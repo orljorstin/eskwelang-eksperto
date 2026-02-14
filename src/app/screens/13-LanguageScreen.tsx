@@ -6,6 +6,7 @@ import { useT } from '../../context/LanguageContext';
 const LANGUAGES = [
     { code: 'tl', name: 'Taglish', description: 'Filipino + English (Recommended)' },
     { code: 'ceb', name: 'Bisaya', description: 'Cebuano (Visayas/Mindanao)' },
+    { code: 'bcl', name: 'Bicol', description: 'Central Bikol (Bicolandia)' },
     { code: 'en', name: 'English', description: 'Standard English' },
 ];
 
