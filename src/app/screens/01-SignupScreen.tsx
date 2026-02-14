@@ -2,9 +2,12 @@ import { useState } from 'react';
 import { User, Smartphone, Lock, Eye, EyeOff, Loader2 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { useNavigate } from 'react-router-dom';
+import { useT } from '../../context/LanguageContext';
+import { PinInput } from '../components/PinInput';
 
 export function SignupScreenGood() {
   const { signup } = useApp();
+  const { t, mapError } = useT();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -13,8 +16,6 @@ export function SignupScreenGood() {
     pin: '',
     confirmPin: ''
   });
-  const [showPin, setShowPin] = useState(false);
-  const [showConfirmPin, setShowConfirmPin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -23,12 +24,17 @@ export function SignupScreenGood() {
     setError('');
 
     if (formData.pin !== formData.confirmPin) {
-      setError('PINs do not match');
+      setError(t('pinMismatch'));
       return;
     }
 
     if (formData.pin.length < 4) {
-      setError('PIN must be at least 4 digits');
+      setError(t('pinTooShort'));
+      return;
+    }
+
+    if (!formData.fullName || !formData.mobile) {
+      setError(t('fillAllFields'));
       return;
     }
 
@@ -37,7 +43,7 @@ export function SignupScreenGood() {
       await signup(formData.fullName, formData.mobile, formData.pin);
       navigate('/login');
     } catch (err: any) {
-      setError(err.message || 'Signup failed');
+      setError(mapError(err.message) || t('signupFailed'));
     } finally {
       setIsLoading(false);
     }
@@ -50,8 +56,8 @@ export function SignupScreenGood() {
         <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mb-4 backdrop-blur-sm">
           <User className="w-8 h-8 text-white" />
         </div>
-        <h1 className="text-2xl font-bold mb-1">Gumawa ng Account</h1>
-        <p className="text-teal-100 text-sm">Create your parent profile to get started</p>
+        <h1 className="text-2xl font-bold mb-1">{t('signupTitle')}</h1>
+        <p className="text-teal-100 text-sm">{t('signupSubtitle')}</p>
       </div>
 
       {/* Form */}
@@ -59,7 +65,7 @@ export function SignupScreenGood() {
         <form onSubmit={handleSignup} className="space-y-6">
           {/* Full Name */}
           <div className="space-y-2">
-            <label className="text-sm font-semibold text-gray-700 ml-1">Full Name (Magulang)</label>
+            <label className="text-sm font-semibold text-gray-700 ml-1">{t('fullNameLabel')}</label>
             <div className="relative">
               <User className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
               <input
@@ -75,7 +81,7 @@ export function SignupScreenGood() {
 
           {/* Mobile Number */}
           <div className="space-y-2">
-            <label className="text-sm font-semibold text-gray-700 ml-1">Mobile Number</label>
+            <label className="text-sm font-semibold text-gray-700 ml-1">{t('mobileLabel')}</label>
             <div className="relative">
               <Smartphone className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
               <input
@@ -90,59 +96,21 @@ export function SignupScreenGood() {
           </div>
 
           {/* PIN Setup */}
-          <div className="space-y-2">
-            <label className="text-sm font-semibold text-gray-700 ml-1">Create Privacy PIN</label>
-            <div className="relative">
-              <Lock className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
-              <input
-                type={showPin ? 'text' : 'password'}
-                required
-                maxLength={6}
-                pattern="[0-9]*"
-                inputMode="numeric"
-                className="w-full pl-12 pr-12 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all outline-none font-mono tracking-widest"
-                placeholder="• • • •"
-                value={formData.pin}
-                onChange={(e) => setFormData({ ...formData, pin: e.target.value })}
-              />
-              <button
-                type="button"
-                onClick={() => setShowPin(!showPin)}
-                className="absolute right-4 top-3.5 text-gray-400 hover:text-gray-600 p-1"
-              >
-                {showPin ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-              </button>
-            </div>
-            <p className="text-xs text-gray-500 ml-1">
-              Gagamitin ito para buksan ang app at settings
-            </p>
+          <div>
+            <PinInput
+              label={t('createPinLabel')}
+              value={formData.pin}
+              onChange={(val) => setFormData({ ...formData, pin: val })}
+            />
+            <p className="text-xs text-gray-500 ml-1 mt-1">{t('pinHelper')}</p>
           </div>
 
           {/* Confirm PIN */}
-          <div className="space-y-2">
-            <label className="text-sm font-semibold text-gray-700 ml-1">Confirm PIN</label>
-            <div className="relative">
-              <Lock className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
-              <input
-                type={showConfirmPin ? 'text' : 'password'}
-                required
-                maxLength={6}
-                pattern="[0-9]*"
-                inputMode="numeric"
-                className="w-full pl-12 pr-12 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all outline-none font-mono tracking-widest"
-                placeholder="• • • •"
-                value={formData.confirmPin}
-                onChange={(e) => setFormData({ ...formData, confirmPin: e.target.value })}
-              />
-              <button
-                type="button"
-                onClick={() => setShowConfirmPin(!showConfirmPin)}
-                className="absolute right-4 top-3.5 text-gray-400 hover:text-gray-600 p-1"
-              >
-                {showConfirmPin ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-              </button>
-            </div>
-          </div>
+          <PinInput
+            label={t('confirmPinLabel')}
+            value={formData.confirmPin}
+            onChange={(val) => setFormData({ ...formData, confirmPin: val })}
+          />
 
           {error && (
             <div className="p-3 bg-red-50 text-red-600 text-sm rounded-lg text-center font-medium animate-in fade-in">
@@ -159,10 +127,10 @@ export function SignupScreenGood() {
               {isLoading ? (
                 <>
                   <Loader2 className="w-5 h-5 animate-spin" />
-                  Creating Account...
+                  {t('signupTitle')}...
                 </>
               ) : (
-                'Create Account'
+                t('signupTitle')
               )}
             </button>
           </div>

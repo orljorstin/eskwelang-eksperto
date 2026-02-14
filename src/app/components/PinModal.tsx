@@ -1,6 +1,8 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Lock, Loader2, X } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import { PinInput } from './PinInput';
+import { useT } from '../../context/LanguageContext';
 
 interface PinModalProps {
     isOpen: boolean;
@@ -10,19 +12,17 @@ interface PinModalProps {
     description?: string;
 }
 
-export function PinModal({ isOpen, onClose, onSuccess, title = "Security Check", description = "Enter your PIN to continue" }: PinModalProps) {
+export function PinModal({ isOpen, onClose, onSuccess, title, description }: PinModalProps) {
     const { verifyPin } = useApp();
+    const { t } = useT();
     const [pin, setPin] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
-    const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         if (isOpen) {
             setPin('');
             setError('');
-            // Focus input after a small delay to ensure modal logic runs
-            setTimeout(() => inputRef.current?.focus(), 100);
         }
     }, [isOpen]);
 
@@ -39,11 +39,11 @@ export function PinModal({ isOpen, onClose, onSuccess, title = "Security Check",
                 onSuccess();
                 onClose();
             } else {
-                setError('Incorrect PIN');
+                setError(t('incorrectPin'));
                 setPin('');
             }
         } catch (err) {
-            setError('Verification failed');
+            setError(t('unexpectedError'));
         } finally {
             setIsLoading(false);
         }
@@ -62,8 +62,8 @@ export function PinModal({ isOpen, onClose, onSuccess, title = "Security Check",
                             <Lock className="w-5 h-5 text-teal-600" />
                         </div>
                         <div>
-                            <h3 className="font-bold text-gray-900">{title}</h3>
-                            <p className="text-xs text-gray-500">{description}</p>
+                            <h3 className="font-bold text-gray-900">{title || t('securityCheck')}</h3>
+                            <p className="text-xs text-gray-500">{description || t('enterPin')}</p>
                         </div>
                     </div>
                     <button onClick={onClose} className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors">
@@ -74,25 +74,18 @@ export function PinModal({ isOpen, onClose, onSuccess, title = "Security Check",
                 {/* Body */}
                 <form onSubmit={handleSubmit} className="p-6">
                     <div className="mb-6">
-                        <input
-                            ref={inputRef}
-                            type="password"
+                        <PinInput
                             value={pin}
-                            onChange={(e) => {
-                                setPin(e.target.value);
+                            onChange={(val) => {
+                                setPin(val);
                                 if (error) setError('');
                             }}
-                            maxLength={6}
-                            className="w-full text-center text-4xl font-mono tracking-[0.5em] py-4 border-2 border-gray-200 rounded-xl focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 outline-none transition-all placeholder:tracking-normal placeholder:font-sans placeholder:text-gray-300"
-                            placeholder="******"
-                            inputMode="numeric"
+                            error={error}
                             autoFocus
+                            showVisibilityToggle
+                            label=""
+                            placeholder="******"
                         />
-                        {error && (
-                            <div className="mt-3 text-center text-sm font-medium text-red-500 animate-in slide-in-from-top-1">
-                                {error}
-                            </div>
-                        )}
                     </div>
 
                     <div className="flex gap-3">
@@ -101,14 +94,14 @@ export function PinModal({ isOpen, onClose, onSuccess, title = "Security Check",
                             onClick={onClose}
                             className="flex-1 py-3 px-4 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-xl transition-colors"
                         >
-                            Cancel
+                            {t('cancel')}
                         </button>
                         <button
                             type="submit"
                             disabled={isLoading || pin.length < 4}
                             className="flex-1 py-3 px-4 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                         >
-                            {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Confirm'}
+                            {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : t('confirm')}
                         </button>
                     </div>
                 </form>

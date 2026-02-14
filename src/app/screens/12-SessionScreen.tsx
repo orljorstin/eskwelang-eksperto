@@ -3,22 +3,25 @@ import { useApp } from '../context/AppContext';
 import { useWakeLock } from '../../hooks/useWakeLock';
 import { PinModal } from '../components/PinModal';
 import { ScreenPinningGuide } from '../components/ScreenPinningGuide';
-import { Play, Pause, Square, BookOpen, Clock, AlertTriangle, CheckCircle, XCircle } from 'lucide-react';
+import { Play, Pause, Square, AlertTriangle, CheckCircle, XCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useT } from '../../context/LanguageContext';
+import { ALLOWED_APPS } from '../../constants/allowedApps';
 
 // Types for the session
 type SessionStatus = 'setup' | 'guide' | 'running' | 'paused' | 'completed' | 'summary';
 
 export function SessionScreen() {
-    const { user, profiles } = useApp();
+    const { profiles } = useApp();
     const navigate = useNavigate();
     const { requestLock, releaseLock, isLocked } = useWakeLock();
+    const { t } = useT();
 
     // Session State
     const [status, setStatus] = useState<SessionStatus>('setup');
     const [selectedProfileId, setSelectedProfileId] = useState<string>('');
     const [duration, setDuration] = useState<number>(25); // Minutes
-    const [subject, setSubject] = useState<string>('Math');
+    const [subject] = useState<string>('Math'); // Could be dynamic
 
     // Timer State
     const [timeLeft, setTimeLeft] = useState<number>(25 * 60);
@@ -127,13 +130,13 @@ export function SessionScreen() {
                     <button onClick={() => navigate(-1)} className="p-2 -ml-2 hover:bg-gray-200 rounded-full">
                         <XCircle className="w-6 h-6 text-gray-400" />
                     </button>
-                    <h1 className="text-2xl font-bold text-gray-900">Start Session</h1>
+                    <h1 className="text-2xl font-bold text-gray-900">{t('startSession')}</h1>
                 </div>
 
                 <div className="space-y-6">
                     {/* Profile Selector */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Student</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">{t('student')}</label>
                         <div className="flex gap-3 overflow-x-auto pb-2">
                             {profiles.filter(p => p.role === 'child').map(p => (
                                 <button
@@ -151,7 +154,7 @@ export function SessionScreen() {
 
                     {/* Duration Slider */}
                     <div className="bg-white p-5 rounded-xl border-2 border-gray-200">
-                        <label className="block text-sm font-medium text-gray-700 mb-4">Duration (Minutes)</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-4">{t('duration')} ({t('minutes')})</label>
                         <div className="text-center text-4xl font-bold text-teal-600 mb-4">
                             {duration} <span className="text-base text-gray-400 font-normal">min</span>
                         </div>
@@ -164,10 +167,15 @@ export function SessionScreen() {
                             onChange={(e) => setDuration(Number(e.target.value))}
                             className="w-full h-3 bg-gray-200 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-teal-600"
                         />
-                        <div className="flex justify-between text-xs text-gray-500 mt-2">
-                            <span>5m</span>
-                            <span>2h</span>
+                        <div className="flex justify-between mt-2">
+                            <button onClick={() => setDuration(Math.max(5, duration - 1))} className="px-3 py-1 bg-gray-200 rounded-lg text-sm font-bold text-gray-700 hover:bg-gray-300">-1m</button>
+                            <div className="flex gap-4 text-xs text-gray-500">
+                                <span>5m</span>
+                                <span>2h</span>
+                            </div>
+                            <button onClick={() => setDuration(Math.min(120, duration + 1))} className="px-3 py-1 bg-gray-200 rounded-lg text-sm font-bold text-gray-700 hover:bg-gray-300">+1m</button>
                         </div>
+
                     </div>
 
                     {/* Start Button */}
@@ -177,7 +185,7 @@ export function SessionScreen() {
                         className="w-full py-4 bg-teal-600 hover:bg-teal-700 text-white text-xl font-bold rounded-xl shadow-lg active:scale-98 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         <Play className="w-6 h-6 fill-current" />
-                        Start Focus
+                        {t('startFocus')}
                     </button>
                 </div>
             </div>
@@ -204,8 +212,8 @@ export function SessionScreen() {
                     isOpen={showPinModal}
                     onClose={() => setShowPinModal(false)}
                     onSuccess={handlePinSuccess}
-                    title="End Session?"
-                    description="Enter PIN to stop the timer early."
+                    title={t('endSession')}
+                    description={t('enterPinToStop')}
                 />
 
                 {/* Progress Bar Background */}
@@ -240,22 +248,17 @@ export function SessionScreen() {
                             {formatTime(timeLeft)}
                         </div>
                         <p className="text-slate-400 mt-2 font-medium tracking-widest text-sm uppercase">
-                            {status === 'paused' ? 'Session Paused' : 'School Mode Active'}
+                            {status === 'paused' ? t('sessionPaused') : t('schoolModeActive')}
                         </p>
                     </div>
 
-                    {/* Alowed Apps Grid (Mock Data) */}
+                    {/* Alowed Apps Grid (Using Constant) */}
                     <div className="w-full max-w-md px-6">
-                        <p className="text-slate-500 text-xs font-bold uppercase mb-4 text-center">Allowed Tools</p>
+                        <p className="text-slate-500 text-xs font-bold uppercase mb-4 text-center">{t('allowedApps')}</p>
                         <div className="grid grid-cols-4 gap-4">
-                            {[
-                                { name: 'Classroom', icon: '📚', color: 'bg-green-500' },
-                                { name: 'Browser', icon: '🌐', color: 'bg-blue-500' },
-                                { name: 'Calculator', icon: '🔢', color: 'bg-orange-500' },
-                                { name: 'Dictionary', icon: '📖', color: 'bg-purple-500' },
-                            ].map((app) => (
+                            {ALLOWED_APPS.filter(app => app.allowed).slice(0, 4).map((app) => (
                                 <button key={app.name} className="flex flex-col items-center gap-2 group">
-                                    <div className={`w-14 h-14 ${app.color} rounded-2xl flex items-center justify-center text-2xl shadow-lg group-active:scale-95 transition-transform`}>
+                                    <div className={`w-14 h-14 ${app.color || 'bg-gray-500'} rounded-2xl flex items-center justify-center text-2xl shadow-lg group-active:scale-95 transition-transform`}>
                                         {app.icon}
                                     </div>
                                     <span className="text-[10px] text-slate-400 font-medium">{app.name}</span>
@@ -285,7 +288,7 @@ export function SessionScreen() {
                 {/* Wake Lock Indicator - subtle */}
                 {isLocked && (
                     <div className="absolute bottom-4 right-4 text-[10px] text-slate-600">
-                        Screen Active
+                        {t('screenActive')}
                     </div>
                 )}
             </div>
@@ -298,16 +301,16 @@ export function SessionScreen() {
                 <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center mb-6 animate-bounce">
                     <CheckCircle className="w-12 h-12 text-white" />
                 </div>
-                <h1 className="text-4xl font-bold mb-2">Great Job!</h1>
-                <p className="text-teal-100 mb-8">You focused for {duration} minutes.</p>
+                <h1 className="text-4xl font-bold mb-2">{t('greatJob')}</h1>
+                <p className="text-teal-100 mb-8">{t('youFocusedFor')} {duration} {t('minutes')}.</p>
 
                 <div className="grid grid-cols-2 gap-4 w-full max-w-xs mb-8">
                     <div className="bg-white/10 p-4 rounded-xl">
-                        <p className="text-xs text-teal-200 uppercase">Interruptions</p>
+                        <p className="text-xs text-teal-200 uppercase">{t('interruptions')}</p>
                         <p className="text-2xl font-bold">{interruptions}</p>
                     </div>
                     <div className="bg-white/10 p-4 rounded-xl">
-                        <p className="text-xs text-teal-200 uppercase">Subject</p>
+                        <p className="text-xs text-teal-200 uppercase">{t('subject')}</p>
                         <p className="text-2xl font-bold truncate">{subject}</p>
                     </div>
                 </div>
@@ -319,7 +322,7 @@ export function SessionScreen() {
                     }}
                     className="w-full max-w-xs py-4 bg-white text-teal-700 font-bold rounded-xl shadow-lg active:scale-95 transition-all"
                 >
-                    Back to Dashboard
+                    {t('backToDashboard')}
                 </button>
             </div>
         );

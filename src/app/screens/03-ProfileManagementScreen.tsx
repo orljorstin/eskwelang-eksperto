@@ -1,11 +1,14 @@
 import { useState } from 'react';
-import { User, UserPlus, Edit, Crown, Baby, Users, ArrowLeft } from 'lucide-react';
+import { User, UserPlus, Edit, Crown, Baby, Users, ArrowLeft, X, Save, Plus, Settings } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { useNavigate } from 'react-router-dom';
+import { useT } from '../../context/LanguageContext';
+import { AVATARS } from '../../constants/avatars';
 
 export function ProfileManagementScreenGood() {
   const { user, profiles, updateProfile } = useApp();
   const navigate = useNavigate();
+  const { t } = useT();
 
   const [editingProfile, setEditingProfile] = useState<any | null>(null);
   const [editName, setEditName] = useState('');
@@ -64,14 +67,12 @@ export function ProfileManagementScreenGood() {
 
   const getRoleLabel = (role: string) => {
     switch (role) {
-      case 'parent': return 'Magulang';
-      case 'child': return 'Anak';
+      case 'parent': return t('roleParent');
+      case 'child': return t('roleChild');
       case 'guest': return 'Guest';
       default: return role;
     }
   };
-
-  const AVATARS = ['👶', '👦', 'ab', '👧', '👱', '😺', '🐶', '🦄', '🤖', '👾'];
 
   return (
     <div className="h-full bg-gray-50 flex flex-col relative">
@@ -79,15 +80,17 @@ export function ProfileManagementScreenGood() {
       {editingProfile && (
         <div className="absolute inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
           <div className="bg-white w-full max-w-sm rounded-2xl shadow-xl overflow-hidden animate-in zoom-in-95 duration-200">
-            <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
+            <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
               <h3 className="font-bold text-gray-900">Edit Profile</h3>
-              <button onClick={() => setEditingProfile(null)} className="text-gray-500 hover:text-gray-700">✕</button>
+              <button onClick={() => setEditingProfile(null)} className="text-gray-500 hover:text-gray-700">
+                <X className="w-5 h-5" />
+              </button>
             </div>
 
             <div className="p-6 space-y-4">
               {/* Avatar Selection */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Avatar</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">{t('chooseAvatar')}</label>
                 <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
                   {AVATARS.map(char => (
                     <button
@@ -104,7 +107,7 @@ export function ProfileManagementScreenGood() {
 
               {/* Name Input */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">{t('childNameLabel')}</label>
                 <input
                   type="text"
                   value={editName}
@@ -115,7 +118,7 @@ export function ProfileManagementScreenGood() {
 
               {/* Age Input */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Age</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">{t('ageLabel')}</label>
                 <input
                   type="number"
                   value={editAge}
@@ -134,8 +137,9 @@ export function ProfileManagementScreenGood() {
               </button>
               <button
                 onClick={handleSave}
-                className="flex-1 py-2.5 bg-teal-600 text-white font-bold rounded-xl hover:bg-teal-700 transition-colors shadow-sm"
+                className="flex-1 py-2.5 bg-teal-600 text-white font-bold rounded-xl hover:bg-teal-700 transition-colors shadow-sm flex items-center justify-center gap-2"
               >
+                <Save className="w-4 h-4" />
                 Save Changes
               </button>
             </div>
@@ -149,8 +153,8 @@ export function ProfileManagementScreenGood() {
           <ArrowLeft className="w-6 h-6 text-gray-600" />
         </button>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Mga Profile</h1>
-          <p className="text-sm text-gray-600 mt-1">I-manage ang family profiles</p>
+          <h1 className="text-2xl font-bold text-gray-900">{t('profilesTitle')}</h1>
+          <p className="text-sm text-gray-600 mt-1">{t('manageProfilesSubtitle')}</p>
         </div>
       </div>
 
@@ -179,7 +183,7 @@ export function ProfileManagementScreenGood() {
                   </div>
                   <p className="text-sm text-gray-600">
                     {getRoleLabel(profile.role)}
-                    {profile.age ? ` • ${profile.age} years old` : ''}
+                    {profile.age ? ` • ${profile.age} ${t('ageLabel')}` : ''}
                   </p>
                 </div>
 
@@ -203,7 +207,7 @@ export function ProfileManagementScreenGood() {
           className="w-full bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white rounded-xl p-4 flex items-center justify-center gap-3 shadow-lg active:scale-98 transition-all"
         >
           <UserPlus className="w-6 h-6" />
-          <span className="text-lg font-semibold">Magdagdag ng Profile</span>
+          <span className="text-lg font-semibold">{t('addChildProfile')}</span>
         </button>
 
         {/* Helper text */}

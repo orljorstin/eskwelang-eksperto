@@ -3,10 +3,12 @@ import { Wallet, Shield, TriangleAlert, CircleCheck, Save, ArrowLeft } from 'luc
 import { useApp } from '../context/AppContext';
 import { useNavigate } from 'react-router-dom';
 import { PinModal } from '../components/PinModal';
+import { useT } from '../../context/LanguageContext';
 
 export function SpendingProtectionScreenGood() {
   const { spendingLimits, updateSpendingLimits } = useApp();
   const navigate = useNavigate();
+  const { t } = useT();
 
   const [weeklyLimit, setWeeklyLimit] = useState(spendingLimits.weekly_limit);
   const [requirePin, setRequirePin] = useState(spendingLimits.require_pin);
@@ -57,8 +59,8 @@ export function SpendingProtectionScreenGood() {
         isOpen={isPinModalOpen}
         onClose={() => setIsPinModalOpen(false)}
         onSuccess={handlePinSuccess}
-        title="Confirm Warning Changes"
-        description="Enter your PIN to save these protection settings."
+        title={t('confirmChanges')}
+        description={t('enterPinToSave')}
       />
 
       {/* Header */}
@@ -74,8 +76,8 @@ export function SpendingProtectionScreenGood() {
             <Wallet className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Load Protection</h1>
-            <p className="text-sm text-gray-600">Proteksyon sa gastos ng load</p>
+            <h1 className="text-2xl font-bold text-gray-900">{t('loadProtection')}</h1>
+            <p className="text-sm text-gray-600">{t('loadProtectionDesc')}</p>
           </div>
         </div>
       </div>
@@ -85,24 +87,25 @@ export function SpendingProtectionScreenGood() {
         {/* Weekly limit */}
         <div className="bg-white rounded-xl p-5 shadow-sm border-2 border-gray-200">
           <h2 className="text-lg font-semibold text-gray-900 mb-3">
-            Lingguhang Limit
+            {t('weeklyLimit')}
           </h2>
           <p className="text-sm text-gray-600 mb-4">
-            Maximum na pwedeng gastusin kada linggo
+            {t('weeklyLimitDesc')}
           </p>
 
           <div className="bg-gradient-to-br from-teal-50 to-blue-50 rounded-lg p-4 mb-4">
             <div className="flex items-baseline gap-2 justify-center">
               <span className="text-4xl font-bold text-teal-700">₱{weeklyLimit}</span>
-              <span className="text-sm text-gray-600">/ week</span>
+              <span className="text-sm text-gray-600">/ {t('week')}</span>
             </div>
           </div>
 
           {/* Slider */}
           <input
+            title={t('weeklyLimit')}
             type="range"
             min="0"
-            max="1000"
+            max="5000"
             step="50"
             value={weeklyLimit}
             onChange={(e) => setWeeklyLimit(Number(e.target.value))}
@@ -111,8 +114,9 @@ export function SpendingProtectionScreenGood() {
 
           <div className="flex justify-between text-xs text-gray-500 mt-2">
             <span>₱0</span>
-            <span>₱1000</span>
+            <span>₱5000</span>
           </div>
+
         </div>
 
         {/* PIN requirement */}
@@ -124,10 +128,10 @@ export function SpendingProtectionScreenGood() {
             </div>
             <div className="flex-1">
               <h2 className="text-lg font-semibold text-gray-900 mb-2">
-                Humingi ng PIN sa Gastos
+                {t('requirePinPurchase')}
               </h2>
               <p className="text-sm text-gray-600">
-                Kailangan ng parent PIN bago makabili ng load o in-app purchase
+                {t('requirePinDesc')}
               </p>
             </div>
             <button
@@ -143,7 +147,7 @@ export function SpendingProtectionScreenGood() {
           {requirePin && (
             <div className="bg-teal-50 rounded-lg p-4 border border-teal-200">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Humingi ng PIN kapag higit sa:
+                {t('pinThresholdLabel')}
               </label>
               <div className="flex items-center gap-3">
                 <span className="text-2xl font-bold text-teal-700">₱{pinThreshold}</span>
@@ -166,11 +170,11 @@ export function SpendingProtectionScreenGood() {
           <div className="flex items-start gap-3">
             <CircleCheck className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" />
             <div>
-              <h3 className="font-semibold text-gray-900 mb-2">Proteksyon Active</h3>
+              <h3 className="font-semibold text-gray-900 mb-2">{t('protectionActive')}</h3>
               <ul className="text-sm text-gray-700 space-y-1">
-                <li>✓ Weekly limit: ₱{weeklyLimit}</li>
-                <li>✓ PIN required: {requirePin ? 'Oo' : 'Hindi'}</li>
-                {requirePin && <li>✓ PIN threshold: ₱{pinThreshold}</li>}
+                <li>✓ {t('weeklyLimit')}: ₱{weeklyLimit}</li>
+                <li>✓ {t('requirePin')}: {requirePin ? t('yes') : t('no')}</li>
+                {requirePin && <li>✓ {t('threshold')}: ₱{pinThreshold}</li>}
               </ul>
             </div>
           </div>
@@ -180,8 +184,7 @@ export function SpendingProtectionScreenGood() {
         <div className="bg-amber-50 rounded-xl p-4 border-2 border-amber-200 flex items-start gap-3">
           <TriangleAlert className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
           <p className="text-sm text-amber-900">
-            <span className="font-medium">Paalala:</span> Kung i-off ang proteksyon,
-            walang hadlang sa pagbili ng load o in-app purchases.
+            <span className="font-medium">{t('warning')}:</span> {t('disableWarning')}
           </p>
         </div>
       </div>
@@ -194,7 +197,7 @@ export function SpendingProtectionScreenGood() {
           className="w-full h-14 bg-teal-600 hover:bg-teal-700 disabled:opacity-50 disabled:bg-gray-400 text-white text-lg font-semibold rounded-xl shadow-lg active:scale-98 transition-all flex items-center justify-center gap-2"
         >
           <Save className="w-5 h-5" />
-          I-save ang Settings
+          {t('saveSettings')}
         </button>
       </div>
     </div>

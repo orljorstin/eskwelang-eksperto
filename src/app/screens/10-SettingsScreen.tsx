@@ -1,8 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import { Globe, Users, Smartphone, CircleHelp, Shield, ChevronRight, TriangleAlert, ArrowLeft } from 'lucide-react';
+import { useApp } from '../context/AppContext';
+import { useT } from '../../context/LanguageContext';
 
 export function SettingsScreenGood() {
   const navigate = useNavigate();
+  const { profiles } = useApp();
+  const { t } = useT();
+
+  const childCount = profiles.filter(p => p.role === 'child').length;
 
   return (
     <div className="h-full bg-gray-50 flex flex-col">
@@ -15,8 +21,8 @@ export function SettingsScreenGood() {
           <ArrowLeft className="w-6 h-6 text-gray-700" />
         </button>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Settings</h1>
-          <p className="text-sm text-gray-600 mt-1">I-manage ang app settings</p>
+          <h1 className="text-2xl font-bold text-gray-900">{t('settings')}</h1>
+          <p className="text-sm text-gray-600 mt-1">{t('manageAppSettings')}</p>
         </div>
       </div>
 
@@ -38,8 +44,8 @@ export function SettingsScreenGood() {
                   <Globe className="w-5 h-5 text-blue-600" />
                 </div>
                 <div className="flex-1 text-left">
-                  <p className="font-medium text-gray-900">Wika / Language</p>
-                  <p className="text-sm text-gray-600">Taglish (Filipino + English)</p>
+                  <p className="font-medium text-gray-900">{t('language')}</p>
+                  <p className="text-sm text-gray-600">Taglish / English</p>
                 </div>
                 <ChevronRight className="w-5 h-5 text-gray-400" />
               </button>
@@ -52,8 +58,8 @@ export function SettingsScreenGood() {
                   <Users className="w-5 h-5 text-purple-600" />
                 </div>
                 <div className="flex-1 text-left">
-                  <p className="font-medium text-gray-900">Manage Profiles</p>
-                  <p className="text-sm text-gray-600">3 profiles • 2 children</p>
+                  <p className="font-medium text-gray-900">{t('manageProfiles')}</p>
+                  <p className="text-sm text-gray-600">{profiles.length} profiles • {childCount} children</p>
                 </div>
                 <ChevronRight className="w-5 h-5 text-gray-400" />
               </button>
@@ -63,7 +69,7 @@ export function SettingsScreenGood() {
           {/* Protection section */}
           <div>
             <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 px-1">
-              Protection Settings
+              {t('protectionSettings')}
             </h2>
             <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200">
               <button
@@ -74,8 +80,8 @@ export function SettingsScreenGood() {
                   <Smartphone className="w-5 h-5 text-teal-600" />
                 </div>
                 <div className="flex-1 text-left">
-                  <p className="font-medium text-gray-900">Launcher Settings</p>
-                  <p className="text-sm text-gray-600">App restrictions & modes</p>
+                  <p className="font-medium text-gray-900">{t('launcherSettings')}</p>
+                  <p className="text-sm text-gray-600">{t('appRestrictions')}</p>
                 </div>
                 <ChevronRight className="w-5 h-5 text-gray-400" />
               </button>
@@ -88,8 +94,8 @@ export function SettingsScreenGood() {
                   <Shield className="w-5 h-5 text-amber-600" />
                 </div>
                 <div className="flex-1 text-left">
-                  <p className="font-medium text-gray-900">Spending Protection</p>
-                  <p className="text-sm text-gray-600">Load & purchase limits</p>
+                  <p className="font-medium text-gray-900">{t('loadProtection')}</p>
+                  <p className="text-sm text-gray-600">{t('purchaseLimits')}</p>
                 </div>
                 <ChevronRight className="w-5 h-5 text-gray-400" />
               </button>
@@ -110,8 +116,8 @@ export function SettingsScreenGood() {
                   <CircleHelp className="w-5 h-5 text-green-600" />
                 </div>
                 <div className="flex-1 text-left">
-                  <p className="font-medium text-gray-900">Paano Gamitin?</p>
-                  <p className="text-sm text-gray-600">Tutorial at FAQ</p>
+                  <p className="font-medium text-gray-900">{t('howToUse')}</p>
+                  <p className="text-sm text-gray-600">Tutorial & FAQ</p>
                 </div>
                 <ChevronRight className="w-5 h-5 text-gray-400" />
               </button>
@@ -132,8 +138,8 @@ export function SettingsScreenGood() {
                   <TriangleAlert className="w-5 h-5 text-red-600" />
                 </div>
                 <div className="flex-1 text-left">
-                  <p className="font-medium text-red-900">I-off ang Proteksyon</p>
-                  <p className="text-sm text-red-600">⚠️ Not recommended</p>
+                  <p className="font-medium text-red-900">{t('advancedSettings')}</p>
+                  <p className="text-sm text-red-600">⚠️ {t('notRecommended')}</p>
                 </div>
                 <ChevronRight className="w-5 h-5 text-red-400" />
               </button>

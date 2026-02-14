@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Trash2, AlertTriangle, Database, Power } from 'lucide-react';
+import { ArrowLeft, Trash2, AlertTriangle, Database } from 'lucide-react';
 import localforage from '../../lib/localforage';
 import { PinModal } from '../components/PinModal';
 import { useApp } from '../context/AppContext';
+import { useT } from '../../context/LanguageContext';
 
 export function AdvancedSettingsScreen() {
     const navigate = useNavigate();
     const { logout } = useApp();
+    const { t } = useT();
     const [isResetModalOpen, setIsResetModalOpen] = useState(false);
 
     const handleResetData = async () => {
@@ -26,8 +28,8 @@ export function AdvancedSettingsScreen() {
                 isOpen={isResetModalOpen}
                 onClose={() => setIsResetModalOpen(false)}
                 onSuccess={handleResetData}
-                title="Factory Reset"
-                description="WARNING: This will delete ALL data on this device. Enter PIN to confirm."
+                title={t('factoryReset')}
+                description={t('factoryResetWarning')}
             />
 
             {/* Header */}
@@ -39,8 +41,8 @@ export function AdvancedSettingsScreen() {
                     <ArrowLeft className="w-6 h-6 text-gray-700" />
                 </button>
                 <div>
-                    <h1 className="text-xl font-bold text-gray-900">Advanced</h1>
-                    <p className="text-sm text-gray-600">Danger Zone & System</p>
+                    <h1 className="text-xl font-bold text-gray-900">{t('advanced')}</h1>
+                    <p className="text-sm text-gray-600">{t('dangerZoneSystem')}</p>
                 </div>
             </div>
 
@@ -51,7 +53,7 @@ export function AdvancedSettingsScreen() {
                 <div className="bg-white rounded-xl p-4 border border-gray-200 shadow-sm">
                     <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
                         <Database className="w-4 h-4 text-gray-500" />
-                        System Info
+                        {t('systemInfo')}
                     </h3>
                     <div className="space-y-2 text-sm">
                         <div className="flex justify-between">
@@ -71,7 +73,7 @@ export function AdvancedSettingsScreen() {
 
                 {/* Danger Zone */}
                 <div>
-                    <h3 className="text-xs font-bold text-red-600 uppercase tracking-wider mb-2 px-1">Danger Zone</h3>
+                    <h3 className="text-xs font-bold text-red-600 uppercase tracking-wider mb-2 px-1">{t('dangerZone')}</h3>
                     <div className="bg-red-50 rounded-xl border border-red-200 overflow-hidden">
                         <button
                             onClick={() => setIsResetModalOpen(true)}
@@ -81,9 +83,9 @@ export function AdvancedSettingsScreen() {
                                 <Trash2 className="w-5 h-5" />
                             </div>
                             <div className="flex-1">
-                                <div className="font-bold text-red-900">Reset All Data</div>
+                                <div className="font-bold text-red-900">{t('resetAllData')}</div>
                                 <div className="text-xs text-red-700 mt-0.5">
-                                    Deletes all profiles, settings, and history. Cannot be undone.
+                                    {t('resetDesc')}
                                 </div>
                             </div>
                         </button>
@@ -93,7 +95,7 @@ export function AdvancedSettingsScreen() {
                 <div className="flex items-start gap-3 p-4 bg-amber-50 rounded-lg border border-amber-200 text-sm text-amber-800">
                     <AlertTriangle className="w-5 h-5 flex-shrink-0 text-amber-600" />
                     <p>
-                        Ang pag-reset ay buburahin lang ang data sa <strong>device na ito</strong>. Kung naka-sync ka sa cloud, pwede mong i-restore ang iyong accounts pagka-login ulit.
+                        {t('resetWarningDetails')}
                     </p>
                 </div>
 

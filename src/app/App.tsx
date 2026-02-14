@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { AppProvider, useApp } from './context/AppContext';
+import { LanguageProvider } from '../context/LanguageContext';
 
 // Screens
 import { SignupScreenGood } from './screens/01-SignupScreen';
@@ -63,45 +64,47 @@ function AppLayout() {
 export default function App() {
   return (
     <AppProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<AppLayout />}>
-            {/* Public Routes */}
-            <Route element={<PublicRoute />}>
-              <Route path="/signup" element={<SignupScreenGood />} />
-              <Route path="/login" element={<LoginScreenGood />} />
+      <LanguageProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<AppLayout />}>
+              {/* Public Routes */}
+              <Route element={<PublicRoute />}>
+                <Route path="/signup" element={<SignupScreenGood />} />
+                <Route path="/login" element={<LoginScreenGood />} />
+              </Route>
+
+              {/* Protected Parent Routes */}
+              <Route element={<ProtectedRoute requireParent={true} />}>
+                <Route path="/dashboard" element={<ParentDashboardScreenGood />} />
+                <Route path="/profiles" element={<ProfileManagementScreenGood />} /> {/* Legacy route alias */}
+                <Route path="/profile-management" element={<ProfileManagementScreenGood />} />
+                <Route path="/profile-switcher" element={<ProfileSwitcherScreenGood />} />
+                <Route path="/school-setup" element={<SchoolModeSetupScreenGood />} />
+                <Route path="/settings" element={<SettingsScreenGood />} />
+                <Route path="/spending-protection" element={<SpendingProtectionScreenGood />} />
+                <Route path="/blocked" element={<BlockedActionScreenGood />} />
+                <Route path="/create-profile" element={<CreateProfileScreen />} />
+
+                {/* Settings Sub-pages */}
+                <Route path="/settings/language" element={<LanguageScreen />} />
+                <Route path="/settings/launcher" element={<LauncherSettingsScreen />} />
+                <Route path="/settings/help" element={<SupportScreen />} />
+                <Route path="/settings/advanced" element={<AdvancedSettingsScreen />} />
+              </Route>
+
+              {/* Child Routes (Special case, might need different protection later) */}
+              <Route path="/child-home" element={<ChildHomeScreenGood />} />
+
+              {/* Default */}
+              {/* Phase 3: School Mode */}
+              <Route path="/session" element={<SessionScreen />} />
+
+              <Route path="/" element={<Navigate to="/dashboard" replace />} />
             </Route>
-
-            {/* Protected Parent Routes */}
-            <Route element={<ProtectedRoute requireParent={true} />}>
-              <Route path="/dashboard" element={<ParentDashboardScreenGood />} />
-              <Route path="/profiles" element={<ProfileManagementScreenGood />} /> {/* Legacy route alias */}
-              <Route path="/profile-management" element={<ProfileManagementScreenGood />} />
-              <Route path="/profile-switcher" element={<ProfileSwitcherScreenGood />} />
-              <Route path="/school-setup" element={<SchoolModeSetupScreenGood />} />
-              <Route path="/settings" element={<SettingsScreenGood />} />
-              <Route path="/spending-protection" element={<SpendingProtectionScreenGood />} />
-              <Route path="/blocked" element={<BlockedActionScreenGood />} />
-              <Route path="/create-profile" element={<CreateProfileScreen />} />
-
-              {/* Settings Sub-pages */}
-              <Route path="/settings/language" element={<LanguageScreen />} />
-              <Route path="/settings/launcher" element={<LauncherSettingsScreen />} />
-              <Route path="/settings/help" element={<SupportScreen />} />
-              <Route path="/settings/advanced" element={<AdvancedSettingsScreen />} />
-            </Route>
-
-            {/* Child Routes (Special case, might need different protection later) */}
-            <Route path="/child-home" element={<ChildHomeScreenGood />} />
-
-            {/* Default */}
-            {/* Phase 3: School Mode */}
-            <Route path="/session" element={<SessionScreen />} />
-
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+          </Routes>
+        </BrowserRouter>
+      </LanguageProvider>
     </AppProvider>
   );
 }

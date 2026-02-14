@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ChevronDown, ChevronUp, MessageCircle, HelpCircle } from 'lucide-react';
+import { useT } from '../../context/LanguageContext';
 
 export function SupportScreen() {
     const navigate = useNavigate();
+    const { t } = useT();
     const [openItem, setOpenItem] = useState<number | null>(0);
 
     const faqs = [
@@ -36,8 +38,8 @@ export function SupportScreen() {
                     <ArrowLeft className="w-6 h-6 text-gray-700" />
                 </button>
                 <div>
-                    <h1 className="text-xl font-bold text-gray-900">Help & Support</h1>
-                    <p className="text-sm text-gray-600">Mga katanungan at tulong</p>
+                    <h1 className="text-xl font-bold text-gray-900">{t('helpSupport')}</h1>
+                    <p className="text-sm text-gray-600">{t('questionsAndHelp')}</p>
                 </div>
             </div>
 
@@ -48,13 +50,13 @@ export function SupportScreen() {
                 <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-6 text-white shadow-lg mb-8">
                     <div className="flex items-start justify-between">
                         <div>
-                            <h2 className="text-lg font-bold mb-1">Kailangan ng tulong?</h2>
+                            <h2 className="text-lg font-bold mb-1">{t('needHelp')}</h2>
                             <p className="text-blue-100 text-sm mb-4 max-w-[200px]">
-                                Andito kami para tumulong sa iyong family tech journey.
+                                {t('hereToHelp')}
                             </p>
                             <button className="bg-white text-blue-700 px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 hover:bg-blue-50 transition-colors">
                                 <MessageCircle className="w-4 h-4" />
-                                Chat Support
+                                {t('chatSupport')}
                             </button>
                         </div>
                         <HelpCircle className="w-16 h-16 text-white/20" />
@@ -62,7 +64,7 @@ export function SupportScreen() {
                 </div>
 
                 {/* FAQs */}
-                <h3 className="font-bold text-gray-900 mb-4 px-1">Frequently Asked Questions</h3>
+                <h3 className="font-bold text-gray-900 mb-4 px-1">{t('frequentlyAskedQuestions')}</h3>
                 <div className="space-y-3">
                     {faqs.map((faq, idx) => (
                         <div

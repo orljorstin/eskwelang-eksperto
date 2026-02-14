@@ -1,6 +1,14 @@
 import { Lock, ArrowLeft, Clock } from 'lucide-react';
+import { useT } from '../../context/LanguageContext';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export function BlockedActionScreenGood() {
+  const { t } = useT();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const appName = location.state?.appName || t('thisApp');
+
   return (
     <div className="h-full bg-gradient-to-br from-orange-50 via-red-50 to-pink-50 flex flex-col items-center justify-center px-6">
       {/* Visual indicator - clear, friendly */}
@@ -9,10 +17,10 @@ export function BlockedActionScreenGood() {
           <Lock className="w-12 h-12 text-white" />
         </div>
         <h1 className="text-2xl font-bold text-gray-900 text-center mb-2">
-          Hindi Pa Pwede
+          {t('accessDenied')}
         </h1>
         <p className="text-base text-gray-600 text-center">
-          Naka-School Mode ka pa
+          {t('schoolModeActive')}
         </p>
       </div>
 
@@ -23,33 +31,37 @@ export function BlockedActionScreenGood() {
             <Clock className="w-6 h-6 text-orange-600" />
           </div>
           <div>
-            <p className="font-semibold text-gray-900">28 minuto pa</p>
-            <p className="text-sm text-gray-600">hanggang matapos ang School Mode</p>
+            <p className="font-semibold text-gray-900">28 {t('minutes')} pa</p>
+            <p className="text-sm text-gray-600">{t('untilSchoolModeEnds')}</p>
           </div>
         </div>
 
         <div className="bg-orange-50 rounded-lg p-4 border border-orange-200">
           <p className="text-sm text-gray-700 text-center">
-            Ang <span className="font-semibold">YouTube</span> ay hindi kasama sa allowed apps ngayon.
+            Ang <span className="font-semibold">{appName}</span> {t('isNotAllowed')}
+
           </p>
         </div>
       </div>
 
       {/* Primary action - clear, dominant */}
-      <button className="w-full max-w-sm h-14 bg-teal-600 hover:bg-teal-700 text-white text-lg font-semibold rounded-xl shadow-lg active:scale-98 transition-all mb-3 flex items-center justify-center gap-2">
+      <button
+        onClick={() => navigate('/dashboard')}
+        className="w-full max-w-sm h-14 bg-teal-600 hover:bg-teal-700 text-white text-lg font-semibold rounded-xl shadow-lg active:scale-98 transition-all mb-3 flex items-center justify-center gap-2"
+      >
         <ArrowLeft className="w-5 h-5" />
-        Bumalik sa Allowed Apps
+        {t('backToAllowedApps')}
       </button>
 
       {/* Secondary action - visually subdued */}
       <button className="text-sm text-gray-600 hover:text-teal-600 font-medium underline underline-offset-2">
-        Humingi ng Permiso sa Magulang
+        {t('askPermission')}
       </button>
 
       {/* Friendly illustration or message */}
       <div className="mt-8 text-center">
         <p className="text-4xl mb-2">📚</p>
-        <p className="text-sm text-gray-500">Focus sa pag-aaral muna!</p>
+        <p className="text-sm text-gray-500">{t('focusOnStudy')}</p>
       </div>
     </div>
   );
@@ -76,7 +88,7 @@ export function BlockedActionScreenBad() {
             ERROR CODE: 403_FORBIDDEN
           </p>
           <p className="text-[10px] text-gray-600 leading-tight">
-            The requested resource is not accessible within the current user profile context. 
+            The requested resource is not accessible within the current user profile context.
             Access restrictions are enforced by parental control policy. Application launch blocked.
           </p>
         </div>

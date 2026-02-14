@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, User, Baby, Check, Loader2 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
-
-const AVATARS = ['👦', '👧', '🧑', '🧒', '👶', '🐸', '🐼', '🐶', '🐱', '🦁', '🐯', '🦄'];
+import { useT } from '../../context/LanguageContext';
+import { AVATARS } from '../../constants/avatars';
 
 export function CreateProfileScreen() {
     const { createProfile } = useApp();
     const navigate = useNavigate();
+    const { t } = useT();
 
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
@@ -42,7 +43,7 @@ export function CreateProfileScreen() {
                 <button onClick={() => navigate(-1)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
                     <ArrowLeft className="w-6 h-6 text-gray-600" />
                 </button>
-                <h1 className="text-xl font-bold text-gray-900">Add Child Profile</h1>
+                <h1 className="text-xl font-bold text-gray-900">{t('addChildProfile')}</h1>
             </div>
 
             <div className="flex-1 overflow-y-auto px-6 py-6">
@@ -51,9 +52,9 @@ export function CreateProfileScreen() {
                     {/* Avatar Selection */}
                     <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
                         <label className="block text-sm font-semibold text-gray-700 mb-4 text-center">
-                            Choose Avatar
+                            {t('chooseAvatar')}
                         </label>
-                        <div className="grid grid-cols-4 gap-4">
+                        <div className="flex flex-wrap justify-center gap-4">
                             {AVATARS.map((a) => (
                                 <button
                                     key={a}
@@ -73,7 +74,7 @@ export function CreateProfileScreen() {
                     {/* Details */}
                     <div className="space-y-4">
                         <div className="space-y-2">
-                            <label className="text-sm font-semibold text-gray-700 ml-1">Child's Name</label>
+                            <label className="text-sm font-semibold text-gray-700 ml-1">{t('childNameLabel')}</label>
                             <div className="relative">
                                 <input
                                     type="text"
@@ -88,7 +89,7 @@ export function CreateProfileScreen() {
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-sm font-semibold text-gray-700 ml-1">Age</label>
+                            <label className="text-sm font-semibold text-gray-700 ml-1">{t('ageLabel')}</label>
                             <div className="relative">
                                 <input
                                     type="number"
@@ -115,7 +116,7 @@ export function CreateProfileScreen() {
                         ) : (
                             <>
                                 <Check className="w-5 h-6" />
-                                Create Profile
+                                {t('addChildProfile')}
                             </>
                         )}
                     </button>

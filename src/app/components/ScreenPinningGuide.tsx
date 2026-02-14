@@ -1,4 +1,5 @@
-import { Pin, Smartphone, Check, X } from 'lucide-react';
+import { Pin, Smartphone, Check } from 'lucide-react';
+import { useT } from '../../context/LanguageContext';
 
 interface ScreenPinningGuideProps {
     onComplete: () => void;
@@ -6,6 +7,8 @@ interface ScreenPinningGuideProps {
 }
 
 export function ScreenPinningGuide({ onComplete, onCancel }: ScreenPinningGuideProps) {
+    const { t } = useT();
+
     return (
         <div className="fixed inset-0 z-50 bg-white flex flex-col animate-in fade-in slide-in-from-bottom-4">
             <div className="flex-1 p-8 flex flex-col justify-center items-center text-center">
@@ -14,11 +17,11 @@ export function ScreenPinningGuide({ onComplete, onCancel }: ScreenPinningGuideP
                 </div>
 
                 <h1 className="text-2xl font-bold text-gray-900 mb-4">
-                    Lock this App
+                    {t('lockAppTitle')}
                 </h1>
 
                 <p className="text-gray-600 mb-8 max-w-xs">
-                    To keep your child focused and safe, please <strong>Pin</strong> or <strong>Guided Access</strong> this app before handing over the device.
+                    {t('lockAppDesc')}
                 </p>
 
                 {/* Instructions Grid */}
@@ -28,7 +31,7 @@ export function ScreenPinningGuide({ onComplete, onCancel }: ScreenPinningGuideP
                             <Smartphone className="w-4 h-4 text-blue-500" /> Android
                         </h3>
                         <p className="text-sm text-gray-600 mt-1">
-                            Swipe up & hold to see recent apps → Tap app icon → Select <strong>"Pin"</strong>.
+                            {t('androidPinInstruction')}
                         </p>
                     </div>
 
@@ -37,7 +40,7 @@ export function ScreenPinningGuide({ onComplete, onCancel }: ScreenPinningGuideP
                             <Smartphone className="w-4 h-4 text-gray-500" /> iOS (iPad/iPhone)
                         </h3>
                         <p className="text-sm text-gray-600 mt-1">
-                            Triple-click the side button to start <strong>Guided Access</strong>.
+                            {t('iosPinInstruction')}
                         </p>
                     </div>
                 </div>
@@ -49,14 +52,14 @@ export function ScreenPinningGuide({ onComplete, onCancel }: ScreenPinningGuideP
                         onClick={onCancel}
                         className="flex-1 py-3.5 text-gray-600 font-medium hover:bg-gray-200 rounded-xl transition-colors"
                     >
-                        Cancel
+                        {t('cancel')}
                     </button>
                     <button
                         onClick={onComplete}
                         className="flex-[2] py-3.5 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-xl shadow-lg active:scale-95 transition-all flex items-center justify-center gap-2"
                     >
                         <Check className="w-5 h-5" />
-                        I've Pinned It
+                        {t('pinnedIt')}
                     </button>
                 </div>
             </div>

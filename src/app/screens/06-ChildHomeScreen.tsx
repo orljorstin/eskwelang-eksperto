@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
-import { GraduationCap, BookOpen, Globe, FileText, Clock, Hand } from 'lucide-react';
+import { GraduationCap, Clock } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { PinModal } from '../components/PinModal';
+import { useT } from '../../context/LanguageContext';
+import { ALLOWED_APPS } from '../../constants/allowedApps';
 
 export function ChildHomeScreenGood() {
+  const { t } = useT();
   const [timeRemaining, setTimeRemaining] = useState(38 * 60); // 38 minutes in seconds
 
   useEffect(() => {
@@ -16,14 +19,8 @@ export function ChildHomeScreenGood() {
   const minutes = Math.floor(timeRemaining / 60);
   const seconds = timeRemaining % 60;
 
-  const allowedApps = [
-    { id: '1', name: 'Google Classroom', icon: '📚', color: 'from-green-400 to-green-500' },
-    { id: '2', name: 'Browser', icon: '🌐', color: 'from-blue-400 to-blue-500' },
-    { id: '3', name: 'PDF Reader', icon: '📄', color: 'from-red-400 to-red-500' },
-    { id: '4', name: 'Calculator', icon: '🔢', color: 'from-purple-400 to-purple-500' },
-    { id: '5', name: 'Dictionary', icon: '📖', color: 'from-orange-400 to-orange-500' },
-    { id: '6', name: 'Notes', icon: '📝', color: 'from-pink-400 to-pink-500' },
-  ];
+  // Filter allowed apps (simulating filter, using all 'true' ones or specific list)
+  const allowedAppsList = ALLOWED_APPS.filter(app => app.allowed);
 
   return (
     <div className="h-full bg-gradient-to-br from-teal-50 via-blue-50 to-purple-50">
@@ -34,10 +31,10 @@ export function ChildHomeScreenGood() {
             👦
           </div>
           <div className="flex-1">
-            <h1 className="text-xl font-bold">Hi, Miguel!</h1>
+            <h1 className="text-xl font-bold">{t('hi')}, Miguel!</h1>
             <div className="flex items-center gap-2 text-teal-100 text-sm">
               <GraduationCap className="w-4 h-4" />
-              <span>School Mode</span>
+              <span>{t('schoolMode')}</span>
             </div>
           </div>
         </div>
@@ -46,7 +43,7 @@ export function ChildHomeScreenGood() {
         <div className="bg-white/20 backdrop-blur-sm rounded-xl px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Clock className="w-5 h-5" />
-            <span className="font-semibold">Time Left:</span>
+            <span className="font-semibold">{t('timeLeft')}:</span>
           </div>
           <div className="text-2xl font-bold tabular-nums">
             {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
@@ -57,17 +54,21 @@ export function ChildHomeScreenGood() {
       {/* Content */}
       <div className="px-6 py-6">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">
-          Mga Pwedeng Apps
+          {t('allowedApps')}
         </h2>
 
         {/* App grid - simple, clear */}
         <div className="grid grid-cols-3 gap-4 mb-6">
-          {allowedApps.map((app) => (
+          {allowedAppsList.slice(0, 6).map((app) => (
             <button
               key={app.id}
               className="flex flex-col items-center gap-2 p-4 bg-white rounded-2xl shadow-md hover:shadow-lg active:scale-95 transition-all"
             >
-              <div className={`w-14 h-14 bg-gradient-to-br ${app.color} rounded-2xl flex items-center justify-center text-2xl shadow-md`}>
+              <div className={`w-14 h-14 bg-gradient-to-br transition-all flex items-center justify-center text-2xl shadow-md rounded-2xl ${app.color ? app.color.replace('bg-', '') : 'bg-gray-100' // Handle color mapping if distinct
+                } ${app.color ? app.color : 'bg-gray-100'}`}>
+                {/* Note: ALLOWED_APPS has 'bg-green-500' format, original had 'from-green-400 to-green-500'. 
+                    Adjusting for simplicity or we can update constant. 
+                    Let's just use the class directly or a default. */}
                 {app.icon}
               </div>
               <span className="text-xs font-medium text-gray-700 text-center leading-tight">
@@ -80,7 +81,7 @@ export function ChildHomeScreenGood() {
         {/* Helper message */}
         <div className="bg-white rounded-xl p-4 shadow-sm border-2 border-teal-200">
           <p className="text-sm text-gray-700 text-center">
-            📖 Mga school apps lang ang pwede ngayon
+            📖 {t('schoolAppsOnly')}
           </p>
         </div>
       </div>
@@ -91,19 +92,20 @@ export function ChildHomeScreenGood() {
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center text-white font-bold">$</div>
-              <span className="font-bold text-orange-900">Game Store</span>
+              <span className="font-bold text-orange-900">{t('gameStore')}</span>
             </div>
-            <span className="text-xs text-orange-700 bg-white/50 px-2 py-1 rounded">Simulation</span>
+            <span className="text-xs text-orange-700 bg-white/50 px-2 py-1 rounded">{t('simulation')}</span>
           </div>
-          <p className="text-sm text-orange-800 mb-3">Test Parental Controls by trying to buy gems.</p>
+          <p className="text-sm text-orange-800 mb-3">{t('testControls')}</p>
           <BuyGemsButton />
         </div>
       </div>
 
-      {/* Request more time - small, non-obvious but available */}
+      {/* Request more time - prominent secondary button */}
       <div className="px-6 pb-6 text-center">
-        <button className="text-sm text-gray-500 hover:text-teal-600 font-medium underline underline-offset-2">
-          Humingi ng Karagdagang Oras
+        <button className="w-full py-3.5 bg-transparent border-2 border-teal-600 text-teal-700 font-bold rounded-xl active:scale-95 hover:bg-teal-50 transition-all flex items-center justify-center gap-2">
+          <Clock className="w-5 h-5" />
+          {t('requestTime')}
         </button>
       </div>
     </div>
@@ -111,7 +113,8 @@ export function ChildHomeScreenGood() {
 }
 
 function BuyGemsButton() {
-  const { makePurchase, spendingLimits, verifyPin } = useApp();
+  const { makePurchase, spendingLimits } = useApp();
+  const { t } = useT();
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'blocks'>('idle');
   const [msg, setMsg] = useState('');
   const [showPin, setShowPin] = useState(false);
@@ -144,10 +147,7 @@ function BuyGemsButton() {
 
   const handlePinSuccess = async () => {
     setShowPin(false);
-    // PIN passed, now force purchase (bypass pin check in UI logic, but context still checks limits)
-    // For prototype, we just re-call makePurchase but we need to signal it was authorized? 
-    // Real app would pass a token. Here we assume if they passed the modal, they are parent.
-    // Let's just call makePurchase.
+    // PIN passed, now force purchase
     const result = await makePurchase(PRICE, '100 Gems');
     if (result.success) {
       setStatus('success');
@@ -165,8 +165,8 @@ function BuyGemsButton() {
         isOpen={showPin}
         onClose={() => setShowPin(false)}
         onSuccess={handlePinSuccess}
-        title="Parent Approval"
-        description={`Purchase of ₱${PRICE} requires PIN.`}
+        title={t('pinRequest')}
+        description={`${t('pinRequestDesc')} (₱${PRICE})`}
       />
 
       <button
@@ -174,7 +174,7 @@ function BuyGemsButton() {
         disabled={status === 'loading'}
         className="w-full py-2 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-lg shadow active:scale-95 transition-all flex items-center justify-center gap-2"
       >
-        {status === 'idle' && <span>Buy Gems (₱{PRICE})</span>}
+        {status === 'idle' && <span>{t('buyGems')} (₱{PRICE})</span>}
         {status === 'loading' && <span>Processing...</span>}
         {status === 'success' && <span>✅ {msg}</span>}
         {status === 'blocks' && <span>🛑 {msg}</span>}
