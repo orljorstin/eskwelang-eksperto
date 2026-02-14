@@ -69,21 +69,22 @@ export default function App() {
             </Route>
 
             {/* Protected Parent Routes */}
-            <Route element={<ProtectedRoute />}>
+            <Route element={<ProtectedRoute requireParent={true} />}>
               <Route path="/dashboard" element={<ParentDashboardScreenGood />} />
+              <Route path="/profiles" element={<ProfileManagementScreenGood />} /> {/* Legacy route alias */}
               <Route path="/profile-management" element={<ProfileManagementScreenGood />} />
               <Route path="/profile-switcher" element={<ProfileSwitcherScreenGood />} />
               <Route path="/school-setup" element={<SchoolModeSetupScreenGood />} />
-              <Route path="/settings" element={<SettingsScreenGood />} />
+              <Route path="/settings" element={<SettingsScreen />} />
               <Route path="/spending-protection" element={<SpendingProtectionScreenGood />} />
               <Route path="/blocked" element={<BlockedActionScreenGood />} />
               <Route path="/create-profile" element={<CreateProfileScreen />} />
 
               {/* Settings Sub-pages */}
-              <Route path="/settings/language" element={<PlaceholderScreen title="Language Settings" description="Change app language and regional settings." />} />
-              <Route path="/settings/launcher" element={<PlaceholderScreen title="Launcher Settings" description="Configure default apps and home screen layout." />} />
-              <Route path="/settings/help" element={<PlaceholderScreen title="Help & Support" description="Tutorials, FAQs, and Customer Support." />} />
-              <Route path="/settings/advanced" element={<PlaceholderScreen title="Advanced Settings" description="System controls and dangerous actions." />} />
+              <Route path="/settings/language" element={<LanguageScreen />} />
+              <Route path="/settings/launcher" element={<LauncherSettingsScreen />} />
+              <Route path="/settings/support" element={<SupportScreen />} />
+              <Route path="/settings/advanced" element={<AdvancedSettingsScreen />} />
             </Route>
 
             {/* Child Routes (Special case, might need different protection later) */}

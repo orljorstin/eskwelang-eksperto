@@ -57,6 +57,7 @@ type AppContextType = {
     signup: (fullname: string, mobile: string, pin: string) => Promise<void>;
     logout: () => void;
     createProfile: (profile: Omit<Profile, 'id' | 'user_id' | 'created_at' | 'updated_at'>) => Promise<void>;
+    updateProfile: (profile: Profile) => Promise<void>;
     updateSpendingLimits: (limits: SpendingLimits) => Promise<void>;
     makePurchase: (amount: number, description: string) => Promise<{ success: boolean; message?: string }>;
     spentThisWeek: number;
@@ -294,6 +295,18 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         setProfiles(prev => [...prev, newProfile]);
     };
 
+    const updateProfile = async (updatedProfile: Profile) => {
+        const profileWithSync = {
+            ...updatedProfile,
+            updated_at: new Date().toISOString(),
+            _syncStatus: 'pending' as const
+        };
+
+        await localforage.setItem(`profile_${updatedProfile.id}`, profileWithSync);
+
+        setProfiles(prev => prev.map(p => p.id === updatedProfile.id ? profileWithSync : p));
+    };
+
     const [spentThisWeek, setSpentThisWeek] = useState(0);
 
     // Load spent amount
@@ -332,6 +345,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
             signup,
             logout,
             createProfile,
+            updateProfile,
             updateSpendingLimits,
             makePurchase, // New export
             spentThisWeek
