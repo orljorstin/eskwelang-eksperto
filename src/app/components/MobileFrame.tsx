@@ -1,4 +1,4 @@
-// Mobile device frame wrapper for consistent viewport
+import React from 'react';
 
 interface MobileFrameProps {
   children: React.ReactNode;
@@ -7,34 +7,38 @@ interface MobileFrameProps {
 
 export function MobileFrame({ children, variant = 'good' }: MobileFrameProps) {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-neutral-100 p-4">
-      <div 
-        className="relative w-full max-w-[375px] h-[667px] bg-white rounded-2xl shadow-2xl overflow-hidden"
-        style={{ aspectRatio: '9/16' }}
+    <div className="flex items-center justify-center bg-gray-900 rounded-3xl p-4">
+      <div
+        className="relative w-full max-w-[375px] h-[812px] bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border-[8px] border-gray-800"
       >
-        {/* Status bar */}
-        <div className="absolute top-0 left-0 right-0 h-6 bg-neutral-900 text-white text-xs flex items-center justify-between px-4">
-          <span>9:41</span>
-          <div className="flex gap-1">
-            <span>📶</span>
-            <span>📡</span>
-            <span>🔋</span>
+        {/* Hardware Notch / Dynamic Island simulation */}
+        <div className="absolute top-0 inset-x-0 w-full h-7 z-50 flex justify-center pointer-events-none">
+          <div className="w-40 h-6 bg-gray-800 rounded-b-3xl"></div>
+        </div>
+
+        {/* Status bar texts */}
+        <div className="absolute top-1 left-6 z-50 text-[10px] font-medium text-gray-800 mix-blend-difference pointer-events-none">
+          9:41
+        </div>
+        <div className="absolute top-1 right-5 z-50 flex gap-1 text-[10px] items-center text-gray-800 mix-blend-difference pointer-events-none">
+          <svg className="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 21L23.6 7H.4L12 21z" /></svg>
+          <div className="w-5 h-2.5 border border-current rounded-[2px] p-[1px] relative">
+            <div className="w-3/4 h-full bg-current rounded-[1px]"></div>
           </div>
         </div>
-        
+
         {/* Variant badge */}
         {variant && (
-          <div className={`absolute top-8 right-4 z-50 px-3 py-1 rounded-full text-xs font-semibold ${
-            variant === 'good' 
-              ? 'bg-green-500 text-white' 
-              : 'bg-red-500 text-white'
-          }`}>
-            {variant === 'good' ? 'GOOD ✓' : 'BAD ✗'}
+          <div className={`absolute top-10 right-4 z-50 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-md border ${variant === 'good'
+              ? 'bg-green-500/90 text-white border-green-400/50 shadow-[0_0_15px_rgba(34,197,94,0.5)]'
+              : 'bg-red-500/90 text-white border-red-400/50 shadow-[0_0_15px_rgba(239,68,68,0.5)]'
+            }`}>
+            {variant === 'good' ? 'UX ✓ GOOD' : 'UX ✗ BAD'}
           </div>
         )}
-        
+
         {/* Screen content */}
-        <div className="h-full pt-6 overflow-y-auto">
+        <div className="h-full w-full overflow-y-auto relative z-0 custom-scrollbar">
           {children}
         </div>
       </div>

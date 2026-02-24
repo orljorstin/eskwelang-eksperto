@@ -5,6 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import { useT } from '../../context/LanguageContext';
 import { AVATARS } from '../../constants/avatars';
 
+/**
+ * GOOD UX DESIGN
+ * Demonstrates:
+ * - Tip 11: Fitts's Law (large 44px+ tap targets for adding and editing profiles)
+ * - Tip 41: Ample spacing between profile cards to prevent misclicks
+ * - Tip 24: Strong visual hierarchy (distinct avatars and role labels)
+ * - Tip  1: Human-readable helper texts
+ */
 export function ProfileManagementScreenGood() {
   const { user, profiles, updateProfile } = useApp();
   const navigate = useNavigate();
@@ -228,6 +236,13 @@ export function ProfileManagementScreenGood() {
   );
 }
 
+/**
+ * BAD UX DESIGN
+ * Violates:
+ * - Tip 41: Cramped spacing in lists
+ * - Tip 11: Fitts's Law (Tiny touch targets for edit/action buttons)
+ * - Tip 24: Weak visual hierarchy (hard to distinguish roles at a glance)
+ */
 export function ProfileManagementScreenBad() {
   const [profiles] = useState([
     { id: '1', name: 'Maria Santos', role: 'parent' },

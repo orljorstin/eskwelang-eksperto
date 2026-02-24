@@ -5,6 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import { useT } from '../../context/LanguageContext';
 import { MOCK_STATS } from '../../data/mockStats';
 
+/**
+ * GOOD UX DESIGN
+ * Demonstrates:
+ * - Tip 25: Progressive disclosure (shows clean high-level stats instead of an overwhelming data table)
+ * - Tip 24: Visual hierarchy and grouping (Cards for School vs Play time, clear Quick Actions)
+ * - Tip 11: Fitts's Law (large tap targets for profiles and Quick Actions)
+ * - Tip  1: Human-readable, friendly language ("Hi, Parent!")
+ */
 export function ParentDashboardScreenGood() {
   const { user, profiles } = useApp();
   const navigate = useNavigate();
@@ -174,6 +182,14 @@ export function ParentDashboardScreenGood() {
   );
 }
 
+/**
+ * BAD UX DESIGN
+ * Violates:
+ * - Tip 25: Lack of progressive disclosure (overwhelming data dump of logs and analytics)
+ * - Tip 41: Extremely cramped UI with tiny fonts
+ * - Tip 21: Equal visual weight for multiple competing buttons (View, Details, Export, Report)
+ * - Tip  1: Data overload instead of human-readable summaries
+ */
 export function ParentDashboardScreenBad() {
   return (
     <div className="h-full bg-white flex flex-col">

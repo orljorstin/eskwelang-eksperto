@@ -4,6 +4,14 @@ import { useApp } from '../context/AppContext';
 import { useNavigate } from 'react-router-dom';
 import { useT } from '../../context/LanguageContext';
 
+/**
+ * GOOD UX DESIGN
+ * Demonstrates:
+ * - Tip 11: Fitts's Law (large 44px+ CTA button)
+ * - Tip  1: Human-like, friendly language ("Welcome Back")
+ * - Tip 41: Adequate spacing and padding
+ * - Tip 44: Sufficient color contrast in Dark UI
+ */
 export function LoginScreenGood() {
   const { login, loginWithMobile, user, isAuthenticated } = useApp();
   const { t, mapError } = useT();
@@ -84,20 +92,20 @@ export function LoginScreenGood() {
           <div className="space-y-4">
             {isFullLogin && (
               <div className="space-y-2">
-                <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider ml-1">{t('mobileLabel')}</label>
+                <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider ml-1">{t('mobileLabel')}</label>
                 <input
                   type="tel"
                   placeholder="0912 345 6789"
                   value={mobile}
                   onChange={(e) => setMobile(e.target.value)}
-                  className="w-full bg-gray-800 border-2 border-gray-700 text-white text-lg px-4 py-3 rounded-xl focus:border-teal-500 focus:ring-4 focus:ring-teal-500/20 transition-all outline-none placeholder:text-gray-600"
+                  className="w-full bg-gray-800 border-2 border-gray-700 text-white text-lg px-4 py-3 rounded-xl focus:border-teal-500 focus:ring-4 focus:ring-teal-500/20 transition-all outline-none placeholder:text-gray-400"
                 />
               </div>
             )}
 
             <div className="space-y-2">
               {/* Custom styling for PinInput on Dark Mode Login */}
-              <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider ml-1">
+              <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider ml-1">
                 {isFullLogin ? t('privacyPin') : t('enterPin')}
               </label>
               <div className="relative">
@@ -107,7 +115,7 @@ export function LoginScreenGood() {
                   maxLength={6}
                   value={pin}
                   onChange={(e) => setPin(e.target.value)}
-                  className={`w-full bg-gray-800 border-2 border-gray-700 text-white text-center text-3xl font-mono tracking-[0.5em] py-4 rounded-2xl focus:border-teal-500 focus:ring-4 focus:ring-teal-500/20 transition-all outline-none placeholder:text-gray-600 placeholder:text-lg placeholder:tracking-normal placeholder:font-sans ${!isFullLogin ? 'auto-focus' : ''}`}
+                  className={`w-full bg-gray-800 border-2 border-gray-700 text-white text-center text-3xl font-mono tracking-[0.5em] py-4 rounded-2xl focus:border-teal-500 focus:ring-4 focus:ring-teal-500/20 transition-all outline-none placeholder:text-gray-400 placeholder:text-lg placeholder:tracking-normal placeholder:font-sans ${!isFullLogin ? 'auto-focus' : ''}`}
                   inputMode="numeric"
                   pattern="[0-9]*"
                 />
@@ -199,6 +207,14 @@ export function LoginScreenGood() {
   );
 }
 
+/**
+ * BAD UX DESIGN
+ * Violates:
+ * - Tip  1: Technical jargon ("Authentication Required", "Invalid credentials")
+ * - Tip 11: Fitts's Law (Tiny touch targets on bottom buttons)
+ * - Tip 41: Poor spacing and alignment
+ * - Tip 21: Conflicting actions with equal visual weight
+ */
 export function LoginScreenBad() {
   const [pin, setPin] = useState('');
 

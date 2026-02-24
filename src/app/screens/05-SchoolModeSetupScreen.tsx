@@ -3,6 +3,14 @@ import { GraduationCap, Gamepad2, Clock, CircleCheck } from 'lucide-react';
 
 type Step = 1 | 2 | 3;
 
+/**
+ * GOOD UX DESIGN
+ * Demonstrates:
+ * - Tip 25: Chunking (dividing a complex setup into 3 manageable steps)
+ * - Tip  3: Progress indicators (clear 1, 2, 3 step tracker)
+ * - Tip 11: Fitts's Law (large tap targets for selections instead of dropdowns)
+ * - Tip 24: Visual hierarchy (active states clearly highlighted with colors and icons)
+ */
 export function SchoolModeSetupScreenGood() {
   const [step, setStep] = useState<Step>(1);
   const [selectedChild, setSelectedChild] = useState('Miguel');
@@ -220,6 +228,14 @@ export function SchoolModeSetupScreenGood() {
   );
 }
 
+/**
+ * BAD UX DESIGN
+ * Violates:
+ * - Tip 25: Lack of chunking (all options crammed into a single view)
+ * - Tip 11: Fitts's Law (tiny dropdowns and number inputs instead of large tap targets)
+ * - Tip  3: No progress indicator or clear path to completion
+ * - Tip 21: Conflicting actions (Start, Begin, OK, Continue all side-by-side)
+ */
 export function SchoolModeSetupScreenBad() {
   return (
     <div className="h-full bg-white flex flex-col">

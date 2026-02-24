@@ -22,6 +22,7 @@ import { LauncherSettingsScreen } from './screens/14-LauncherSettingsScreen';
 import { SupportScreen } from './screens/15-SupportScreen';
 import { AdvancedSettingsScreen } from './screens/16-AdvancedSettingsScreen';
 import { RecentActivitiesScreen } from './screens/17-RecentActivitiesScreen';
+import { ComparisonGallery } from './screens/comparisons/ComparisonGallery';
 
 // Protect routes that require parent authentication
 function ProtectedRoute({ requireParent }: { requireParent?: boolean }) {
@@ -68,6 +69,9 @@ export default function App() {
       <LanguageProvider>
         <BrowserRouter>
           <Routes>
+            {/* HCI2 Comparison Gallery (Full Screen, bypasses AppLayout) */}
+            <Route path="/comparison" element={<ComparisonGallery />} />
+
             <Route element={<AppLayout />}>
               {/* Public Routes */}
               <Route element={<PublicRoute />}>

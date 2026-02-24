@@ -3,6 +3,14 @@ import { useApp } from '../context/AppContext';
 import { useT } from '../../context/LanguageContext';
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * GOOD UX DESIGN
+ * Demonstrates:
+ * - Tip  1: Human-like, friendly language ("Who is watching?")
+ * - Tip 11: Fitts's Law (Massive touch targets for child profiles)
+ * - Tip 24: Clear visual hierarchy distinguishing Parent (locked) vs Child vs Guest
+ * - Tip 41: Ample spacing
+ */
 export function ProfileSwitcherScreenGood() {
   const { user, profiles } = useApp();
   const { t } = useT();
@@ -102,6 +110,13 @@ export function ProfileSwitcherScreenGood() {
   );
 }
 
+/**
+ * BAD UX DESIGN
+ * Violates:
+ * - Tip  1: Technical jargon ("Terminate current session and clear temporary cache")
+ * - Tip 21: Four competing primary buttons with equal visual weight
+ * - Tip 41: Tiny, cramped tap targets for profile selection
+ */
 export function ProfileSwitcherScreenBad() {
   return (
     <div className="h-full bg-white flex flex-col">

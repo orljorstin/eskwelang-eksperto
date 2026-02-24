@@ -5,6 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import { useT } from '../../context/LanguageContext';
 import { PinInput } from '../components/PinInput';
 
+/**
+ * GOOD UX DESIGN
+ * Demonstrates:
+ * - Tip 14: Single-column form (avoids multi-column layouts on mobile)
+ * - Tip 11: Fitts's Law (large 44px+ CTA buttons that span the width)
+ * - Tip 44: Sufficient color contrast (placeholder text adapted for Dark UI)
+ * - Tip  1: Human-like, friendly language with clear explanations
+ */
 export function SignupScreenGood() {
   const { signup } = useApp();
   const { t, mapError } = useT();
@@ -72,13 +80,13 @@ export function SignupScreenGood() {
           <form onSubmit={handleSignup} className="space-y-6">
             {/* Full Name */}
             <div className="space-y-2">
-              <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider ml-1">{t('fullNameLabel')}</label>
+              <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider ml-1">{t('fullNameLabel')}</label>
               <div className="relative">
-                <User className="absolute left-4 top-3.5 w-5 h-5 text-gray-500" />
+                <User className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
                 <input
                   type="text"
                   required
-                  className="w-full pl-12 pr-4 py-3.5 bg-gray-800 border-2 border-gray-700 text-white rounded-xl focus:ring-4 focus:ring-teal-500/20 focus:border-teal-500 transition-all outline-none placeholder:text-gray-600"
+                  className="w-full pl-12 pr-4 py-3.5 bg-gray-800 border-2 border-gray-700 text-white rounded-xl focus:ring-4 focus:ring-teal-500/20 focus:border-teal-500 transition-all outline-none placeholder:text-gray-400"
                   placeholder="Juan Dela Cruz"
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
@@ -88,13 +96,13 @@ export function SignupScreenGood() {
 
             {/* Mobile Number */}
             <div className="space-y-2">
-              <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider ml-1">{t('mobileLabel')}</label>
+              <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider ml-1">{t('mobileLabel')}</label>
               <div className="relative">
-                <Smartphone className="absolute left-4 top-3.5 w-5 h-5 text-gray-500" />
+                <Smartphone className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
                 <input
                   type="tel"
                   required
-                  className="w-full pl-12 pr-4 py-3.5 bg-gray-800 border-2 border-gray-700 text-white rounded-xl focus:ring-4 focus:ring-teal-500/20 focus:border-teal-500 transition-all outline-none placeholder:text-gray-600"
+                  className="w-full pl-12 pr-4 py-3.5 bg-gray-800 border-2 border-gray-700 text-white rounded-xl focus:ring-4 focus:ring-teal-500/20 focus:border-teal-500 transition-all outline-none placeholder:text-gray-400"
                   placeholder="0912 345 6789"
                   value={formData.mobile}
                   onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
@@ -158,6 +166,14 @@ export function SignupScreenGood() {
   );
 }
 
+/**
+ * BAD UX DESIGN
+ * Violates:
+ * - Tip 14: Multi-column layout on mobile (grid-cols-2 for form fields)
+ * - Tip 11: Fitts's Law (small, cramped text links and inputs)
+ * - Tip  1: Uses technical jargon instead of friendly language ("primary authentication mechanisms")
+ * - Tip 41: Extremely poor spacing and cluttered buttons (No clear primary action)
+ */
 export function SignupScreenBad() {
   const [formData, setFormData] = useState({
     name: '',

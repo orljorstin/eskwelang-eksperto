@@ -1,0 +1,198 @@
+import { Globe, Users, Smartphone, HelpCircle, Shield, ChevronRight, AlertTriangle } from 'lucide-react';
+
+export function SettingsScreenGood() {
+  return (
+    <div className="h-full bg-gray-50 flex flex-col">
+      {/* Header */}
+      <div className="px-6 py-4 bg-white border-b border-gray-200">
+        <h1 className="text-2xl font-bold text-gray-900">Settings</h1>
+        <p className="text-sm text-gray-600 mt-1">I-manage ang app settings</p>
+      </div>
+
+      {/* Content */}
+      <div className="flex-1 px-6 py-6 overflow-y-auto">
+        {/* Settings sections - clear grouping */}
+        <div className="space-y-6">
+          {/* General section */}
+          <div>
+            <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 px-1">
+              General
+            </h2>
+            <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200">
+              <button className="w-full px-4 py-4 flex items-center gap-4 hover:bg-gray-50 transition-colors border-b border-gray-100">
+                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Globe className="w-5 h-5 text-blue-600" />
+                </div>
+                <div className="flex-1 text-left">
+                  <p className="font-medium text-gray-900">Wika / Language</p>
+                  <p className="text-sm text-gray-600">Taglish (Filipino + English)</p>
+                </div>
+                <ChevronRight className="w-5 h-5 text-gray-400" />
+              </button>
+
+              <button className="w-full px-4 py-4 flex items-center gap-4 hover:bg-gray-50 transition-colors">
+                <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Users className="w-5 h-5 text-purple-600" />
+                </div>
+                <div className="flex-1 text-left">
+                  <p className="font-medium text-gray-900">Manage Profiles</p>
+                  <p className="text-sm text-gray-600">3 profiles • 2 children</p>
+                </div>
+                <ChevronRight className="w-5 h-5 text-gray-400" />
+              </button>
+            </div>
+          </div>
+
+          {/* Protection section */}
+          <div>
+            <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 px-1">
+              Protection Settings
+            </h2>
+            <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200">
+              <button className="w-full px-4 py-4 flex items-center gap-4 hover:bg-gray-50 transition-colors border-b border-gray-100">
+                <div className="w-10 h-10 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Smartphone className="w-5 h-5 text-teal-600" />
+                </div>
+                <div className="flex-1 text-left">
+                  <p className="font-medium text-gray-900">Launcher Settings</p>
+                  <p className="text-sm text-gray-600">App restrictions & modes</p>
+                </div>
+                <ChevronRight className="w-5 h-5 text-gray-400" />
+              </button>
+
+              <button className="w-full px-4 py-4 flex items-center gap-4 hover:bg-gray-50 transition-colors">
+                <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Shield className="w-5 h-5 text-amber-600" />
+                </div>
+                <div className="flex-1 text-left">
+                  <p className="font-medium text-gray-900">Spending Protection</p>
+                  <p className="text-sm text-gray-600">Load & purchase limits</p>
+                </div>
+                <ChevronRight className="w-5 h-5 text-gray-400" />
+              </button>
+            </div>
+          </div>
+
+          {/* Help section */}
+          <div>
+            <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 px-1">
+              Support
+            </h2>
+            <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200">
+              <button className="w-full px-4 py-4 flex items-center gap-4 hover:bg-gray-50 transition-colors">
+                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <HelpCircle className="w-5 h-5 text-green-600" />
+                </div>
+                <div className="flex-1 text-left">
+                  <p className="font-medium text-gray-900">Paano Gamitin?</p>
+                  <p className="text-sm text-gray-600">Tutorial at FAQ</p>
+                </div>
+                <ChevronRight className="w-5 h-5 text-gray-400" />
+              </button>
+            </div>
+          </div>
+
+          {/* Danger zone - clearly marked */}
+          <div>
+            <h2 className="text-xs font-semibold text-red-600 uppercase tracking-wider mb-3 px-1">
+              Advanced
+            </h2>
+            <div className="bg-white rounded-xl overflow-hidden shadow-sm border-2 border-red-200">
+              <button className="w-full px-4 py-4 flex items-center gap-4 hover:bg-red-50 transition-colors">
+                <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <AlertTriangle className="w-5 h-5 text-red-600" />
+                </div>
+                <div className="flex-1 text-left">
+                  <p className="font-medium text-red-900">I-off ang Proteksyon</p>
+                  <p className="text-sm text-red-600">⚠️ Not recommended</p>
+                </div>
+                <ChevronRight className="w-5 h-5 text-red-400" />
+              </button>
+            </div>
+          </div>
+
+          {/* App info */}
+          <div className="pt-4 text-center">
+            <p className="text-xs text-gray-500">Eskwelang-Eksperto v1.0</p>
+            <p className="text-xs text-gray-400 mt-1">Para sa pamilya 💙</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function SettingsScreenBad() {
+  return (
+    <div className="h-full bg-white flex flex-col">
+      {/* Poor header */}
+      <div className="px-3 py-2 bg-gray-200 border-b">
+        <h1 className="text-sm font-normal text-gray-700">Configuration</h1>
+      </div>
+
+      {/* Content - poor organization */}
+      <div className="flex-1 px-3 py-3 overflow-y-auto">
+        {/* Mixed settings list - no grouping */}
+        <div className="space-y-1">
+          <div className="flex items-center justify-between bg-gray-50 p-2 rounded border border-gray-200">
+            <span className="text-xs text-gray-700">Language</span>
+            <button className="text-[10px] bg-blue-400 text-white px-2 py-1 rounded">Change</button>
+          </div>
+
+          <div className="flex items-center justify-between bg-gray-50 p-2 rounded border border-gray-200">
+            <span className="text-xs text-gray-700">Profiles</span>
+            <button className="text-[10px] bg-blue-400 text-white px-2 py-1 rounded">Manage</button>
+          </div>
+
+          <div className="flex items-center justify-between bg-gray-50 p-2 rounded border border-gray-200">
+            <span className="text-xs text-gray-700">Launcher</span>
+            <button className="text-[10px] bg-blue-400 text-white px-2 py-1 rounded">Config</button>
+          </div>
+
+          <div className="flex items-center justify-between bg-gray-50 p-2 rounded border border-gray-200">
+            <span className="text-xs text-gray-700">Protection</span>
+            <button className="text-[10px] bg-blue-400 text-white px-2 py-1 rounded">Edit</button>
+          </div>
+
+          <div className="flex items-center justify-between bg-gray-50 p-2 rounded border border-gray-200">
+            <span className="text-xs text-gray-700">Help/FAQ</span>
+            <button className="text-[10px] bg-blue-400 text-white px-2 py-1 rounded">View</button>
+          </div>
+
+          {/* Dangerous option not clearly marked */}
+          <div className="flex items-center justify-between bg-gray-50 p-2 rounded border border-gray-200">
+            <span className="text-xs text-gray-700">Disable Controls</span>
+            <button className="text-[10px] bg-blue-400 text-white px-2 py-1 rounded">Off</button>
+          </div>
+        </div>
+
+        {/* Overloaded with unnecessary options */}
+        <div className="mt-3 space-y-1">
+          <button className="w-full h-7 bg-purple-400 text-white text-xs rounded">Import Data</button>
+          <button className="w-full h-7 bg-orange-400 text-white text-xs rounded">Export Logs</button>
+          <button className="w-full h-7 bg-pink-400 text-white text-xs rounded">Sync Cloud</button>
+          <button className="w-full h-7 bg-indigo-400 text-white text-xs rounded">Backup</button>
+          <button className="w-full h-7 bg-yellow-400 text-white text-xs rounded">Restore</button>
+        </div>
+
+        {/* Technical info dump */}
+        <div className="mt-4 bg-gray-100 p-2 rounded border border-gray-300">
+          <p className="text-[9px] text-gray-600 leading-tight mb-1">
+            System Information:
+          </p>
+          <p className="text-[9px] text-gray-500 leading-tight">
+            Build: v1.0.234 | API Level: 28 | Database: SQLite 3.22 | 
+            Memory: 512MB | Storage: 2.4GB used | Last sync: 2h ago | 
+            Profiles: 3 | Active sessions: 1
+          </p>
+        </div>
+
+        {/* Poor help text */}
+        <p className="text-[9px] text-gray-400 mt-3 text-center leading-tight">
+          For advanced configuration options and system administration features, 
+          consult documentation or contact technical support.
+        </p>
+      </div>
+    </div>
+  );
+}

@@ -5,6 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import { PinModal } from '../components/PinModal';
 import { useT } from '../../context/LanguageContext';
 
+/**
+ * GOOD UX DESIGN
+ * Demonstrates:
+ * - Tip 11: Fitts's Law (Large touch sliders and toggles instead of tiny text inputs)
+ * - Tip  1: Human-readable descriptions explaining what each setting does
+ * - Tip 41: Clear spacing and visual grouping using cards
+ * - Tip 16: System status (Save button is disabled when no changes are made)
+ */
 export function SpendingProtectionScreenGood() {
   const { spendingLimits, updateSpendingLimits } = useApp();
   const navigate = useNavigate();
@@ -209,6 +217,13 @@ export function SpendingProtectionScreenGood() {
   );
 }
 
+/**
+ * BAD UX DESIGN
+ * Violates:
+ * - Tip 11: Fitts's Law (Tiny number inputs and cramped enable/disable buttons)
+ * - Tip 41: Poor spacing and lack of visual grouping
+ * - Tip  1: Technical jargon and lack of explanatory text for complex settings
+ */
 export function SpendingProtectionScreenBad() {
   return (
     <div className="h-full bg-white flex flex-col">

@@ -3,6 +3,14 @@ import { Globe, Users, Smartphone, CircleHelp, Shield, ChevronRight, TriangleAle
 import { useApp } from '../context/AppContext';
 import { useT } from '../../context/LanguageContext';
 
+/**
+ * GOOD UX DESIGN
+ * Demonstrates:
+ * - Tip 24: Visual hierarchy and logical grouping (General, Protection, Support, Advanced)
+ * - Tip 11: Fitts's Law (Large touch targets spanning the full row for each setting)
+ * - Tip 45: Consistent iconography aiding quick scanning
+ * - Tip  1: Human-readable subtitles under each setting explaining what it does
+ */
 export function SettingsScreenGood() {
   const navigate = useNavigate();
   const { profiles, logout } = useApp();
@@ -177,6 +185,14 @@ export function SettingsScreenGood() {
   );
 }
 
+/**
+ * BAD UX DESIGN
+ * Violates:
+ * - Tip 24: Lack of visual grouping (flat, unorganized list of items)
+ * - Tip 11: Fitts's Law (Tiny tap targets for action buttons instead of full-row taps)
+ * - Tip 21: Equal visual weight for dangerous actions (Disable Controls) hidden among normal ones
+ * - Tip  1: Severe technical jargon dump at the bottom
+ */
 export function SettingsScreenBad() {
   return (
     <div className="h-full bg-white flex flex-col">

@@ -2,6 +2,13 @@ import { Lock, ArrowLeft, Clock } from 'lucide-react';
 import { useT } from '../../context/LanguageContext';
 import { useNavigate, useLocation } from 'react-router-dom';
 
+/**
+ * GOOD UX DESIGN
+ * Demonstrates:
+ * - Tip  1: Human-readable error messages explaining exactly why the app is blocked
+ * - Tip 25: Clear dominant primary action ("Back to Allowed Apps")
+ * - Tip 45: Friendly illustration and colors to soften the negative experience of being blocked
+ */
 export function BlockedActionScreenGood() {
   const { t } = useT();
 
@@ -67,6 +74,13 @@ export function BlockedActionScreenGood() {
   );
 }
 
+/**
+ * BAD UX DESIGN
+ * Violates:
+ * - Tip  1: Severe technical jargon ("ERROR CODE: 403_FORBIDDEN") inducing anxiety
+ * - Tip 21: Six competing buttons with equal visual weight causing decision paralysis
+ * - Tip 44: Extremely harsh colors (pure red header) for a routine block action
+ */
 export function BlockedActionScreenBad() {
   return (
     <div className="h-full bg-white flex flex-col">

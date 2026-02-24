@@ -5,6 +5,14 @@ import { PinModal } from '../components/PinModal';
 import { useT } from '../../context/LanguageContext';
 import { ALLOWED_APPS } from '../../constants/allowedApps';
 
+/**
+ * GOOD UX DESIGN
+ * Demonstrates:
+ * - Tip  1: Human-like, friendly language ("Hi, Miguel!", "Time Left")
+ * - Tip 24: Clear visual hierarchy (Prominent timer, distinct allowed apps grid)
+ * - Tip 11: Fitts's Law (Large touch targets for apps and Request Time button)
+ * - Tip 45: Effective use of icons for quick scanning (Clock, Graduation cap)
+ */
 export function ChildHomeScreenGood() {
   const { t } = useT();
   const [timeRemaining, setTimeRemaining] = useState(38 * 60); // 38 minutes in seconds
@@ -183,6 +191,14 @@ function BuyGemsButton() {
   );
 }
 
+/**
+ * BAD UX DESIGN
+ * Violates:
+ * - Tip 21: Conflicting actions (Request, Add, Extend, More time all side-by-side)
+ * - Tip 41: Cramped UI and poor spacing (Tiny app icons, dense text)
+ * - Tip  1: Technical jargon ("applications whitelisted for academic purposes")
+ * - Tip 24: Confusing layout (mixes allowed and blocked apps with poor distinction)
+ */
 export function ChildHomeScreenBad() {
   return (
     <div className="h-full bg-white">
