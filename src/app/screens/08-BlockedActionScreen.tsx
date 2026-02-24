@@ -17,58 +17,65 @@ export function BlockedActionScreenGood() {
   const appName = location.state?.appName || t('thisApp');
 
   return (
-    <div className="h-full bg-gradient-to-br from-orange-50 via-red-50 to-pink-50 flex flex-col items-center justify-center px-6">
-      {/* Visual indicator - clear, friendly */}
-      <div className="mb-8">
-        <div className="w-24 h-24 bg-gradient-to-br from-orange-400 to-red-400 rounded-full flex items-center justify-center shadow-2xl mb-4 mx-auto">
-          <Lock className="w-12 h-12 text-white" />
-        </div>
-        <h1 className="text-2xl font-bold text-gray-900 text-center mb-2">
-          {t('accessDenied')}
-        </h1>
-        <p className="text-base text-gray-600 text-center">
-          {t('schoolModeActive')}
-        </p>
+    <div className="h-full bg-gray-900 flex flex-col items-center justify-center px-6 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-[-50%] right-[-10%] w-64 h-64 bg-teal-600/30 rounded-full blur-3xl mix-blend-screen" />
+        <div className="absolute bottom-[-50%] left-[-10%] w-64 h-64 bg-purple-600/30 rounded-full blur-3xl mix-blend-screen" />
       </div>
 
-      {/* Clear explanation */}
-      <div className="bg-white rounded-2xl p-6 shadow-xl border-2 border-orange-200 mb-6 w-full max-w-sm">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
-            <Clock className="w-6 h-6 text-orange-600" />
+      <div className="relative z-10 w-full flex flex-col items-center">
+        {/* Visual indicator - clear, friendly */}
+        <div className="mb-8">
+          <div className="w-24 h-24 bg-gradient-to-br from-orange-400 to-red-400 rounded-full flex items-center justify-center shadow-lg shadow-orange-500/20 mb-4 mx-auto border-4 border-gray-800">
+            <Lock className="w-10 h-10 text-white" />
           </div>
-          <div>
-            <p className="font-semibold text-gray-900">28 {t('minutes')} pa</p>
-            <p className="text-sm text-gray-600">{t('untilSchoolModeEnds')}</p>
-          </div>
-        </div>
-
-        <div className="bg-orange-50 rounded-lg p-4 border border-orange-200">
-          <p className="text-sm text-gray-700 text-center">
-            Ang <span className="font-semibold">{appName}</span> {t('isNotAllowed')}
-
+          <h1 className="text-2xl font-bold text-white text-center mb-2">
+            {t('accessDenied')}
+          </h1>
+          <p className="text-base text-gray-400 text-center">
+            {t('schoolModeActive')}
           </p>
         </div>
-      </div>
 
-      {/* Primary action - clear, dominant */}
-      <button
-        onClick={() => navigate('/dashboard')}
-        className="w-full max-w-sm h-14 bg-teal-600 hover:bg-teal-700 text-white text-lg font-semibold rounded-xl shadow-lg active:scale-98 transition-all mb-3 flex items-center justify-center gap-2"
-      >
-        <ArrowLeft className="w-5 h-5" />
-        {t('backToAllowedApps')}
-      </button>
+        {/* Clear explanation */}
+        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-white/10 mb-6 w-full max-w-sm">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-12 h-12 bg-orange-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+              <Clock className="w-6 h-6 text-orange-400" />
+            </div>
+            <div>
+              <p className="font-semibold text-white">28 {t('minutes')} pa</p>
+              <p className="text-sm text-gray-400">{t('tillSchoolModeDone')}</p>
+            </div>
+          </div>
 
-      {/* Secondary action - visually subdued */}
-      <button className="text-sm text-gray-600 hover:text-teal-600 font-medium underline underline-offset-2">
-        {t('askPermission')}
-      </button>
+          <div className="bg-black/20 rounded-lg p-4 border border-white/5">
+            <p className="text-sm text-gray-300 text-center">
+              Ang <span className="font-semibold text-white">{appName}</span> {t('isNotAllowed')}
+            </p>
+          </div>
+        </div>
 
-      {/* Friendly illustration or message */}
-      <div className="mt-8 text-center">
-        <p className="text-4xl mb-2">📚</p>
-        <p className="text-sm text-gray-500">{t('focusOnStudy')}</p>
+        {/* Primary action - clear, dominant */}
+        <button
+          onClick={() => navigate('/dashboard')}
+          className="w-full max-w-sm h-14 bg-teal-600 hover:bg-teal-700 text-white text-lg font-semibold rounded-xl shadow-lg active:scale-98 transition-all mb-4 flex items-center justify-center gap-2 border border-teal-500/50"
+        >
+          <ArrowLeft className="w-5 h-5" />
+          {t('backToAllowed')}
+        </button>
+
+        {/* Secondary action - visually subdued */}
+        <button className="text-sm text-gray-400 hover:text-teal-400 font-medium underline underline-offset-2 transition-colors">
+          {t('askPermission')}
+        </button>
+
+        {/* Friendly illustration or message */}
+        <div className="mt-8 text-center">
+          <p className="text-4xl mb-2">📚</p>
+          <p className="text-sm text-gray-500">{t('focusFirst')}</p>
+        </div>
       </div>
     </div>
   );
