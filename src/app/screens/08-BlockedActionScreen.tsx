@@ -52,7 +52,7 @@ export function BlockedActionScreenGood() {
 
           <div className="bg-black/20 rounded-lg p-4 border border-white/5">
             <p className="text-sm text-gray-300 text-center">
-              Ang <span className="font-semibold text-white">{appName}</span> {t('isNotAllowed')}
+              <span className="font-semibold text-white">{appName}</span> {t('isNotAllowed')}
             </p>
           </div>
         </div>

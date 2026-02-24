@@ -48,63 +48,55 @@ export function ProfileSwitcherScreenGood() {
   };
 
   return (
-    <div className="h-full bg-gradient-to-br from-teal-500 to-teal-700 flex flex-col items-center justify-center px-6">
-      {/* Header - clear question */}
-      <div className="text-center mb-12">
-        <h1 className="text-3xl font-bold text-white mb-3">
-          {t('whoIsWatching')}
-        </h1>
-        <p className="text-teal-100 text-base">
-          {t('selectProfile')}
-        </p>
+    <div className="h-full bg-gray-900 flex flex-col items-center justify-center px-6 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-[-50%] right-[-10%] w-64 h-64 bg-teal-600/30 rounded-full blur-3xl mix-blend-screen" />
+        <div className="absolute bottom-[-50%] left-[-10%] w-64 h-64 bg-purple-600/30 rounded-full blur-3xl mix-blend-screen" />
       </div>
 
-      {/* Profile tiles - large, tappable, clear */}
-      <div className="w-full max-w-sm space-y-4">
-        {allProfiles.map((profile) => (
-          <button
-            key={profile.id}
-            onClick={() => handleProfileClick(profile)}
-            className={`w-full bg-white/95 backdrop-blur-sm hover:bg-white rounded-2xl p-6 flex items-center gap-4 shadow-2xl active:scale-95 transition-all border-4 ${profile.role === 'parent' ? 'border-amber-400' : 'border-transparent hover:border-blue-300'
-              }`}
-          >
-            <div className={`w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-lg flex-shrink-0 ${profile.role === 'parent' ? 'bg-gradient-to-br from-amber-400 to-amber-500' : 'bg-gradient-to-br from-blue-400 to-blue-500'
-              }`}>
-              {profile.avatar}
-            </div>
-            <div className="flex-1 text-left">
-              <h3 className="text-xl font-bold text-gray-900">{profile.name}</h3>
-              <p className="text-sm text-gray-600 flex items-center gap-1 mt-1">
-                {profile.role === 'parent' ? <Crown className="w-4 h-4 text-amber-500" /> : <Baby className="w-4 h-4 text-blue-500" />}
-                {getRoleLabel(profile.role)}
-                {profile.age && ` • ${profile.age} ${t('ageLabel')}`}
-              </p>
-            </div>
-            {profile.role === 'parent' && (
-              <div className="flex items-center gap-2 bg-amber-100 px-3 py-2 rounded-full">
-                <Lock className="w-4 h-4 text-amber-700" />
-                <span className="text-xs font-semibold text-amber-700">PIN</span>
-              </div>
-            )}
-          </button>
-        ))}
+      <div className="relative z-10 w-full flex flex-col items-center flex-1 justify-center max-w-sm mx-auto">
+        {/* Header - clear question */}
+        <div className="text-center mb-12">
+          <h1 className="text-3xl font-bold text-white mb-3">
+            {t('whoIsWatching')}
+          </h1>
+          <p className="text-teal-100 text-base">
+            {t('selectProfile')}
+          </p>
+        </div>
 
-        {/* Guest tile - visually distinct */}
-        <button
-          onClick={() => navigate('/dashboard')}
-          className="w-full bg-white/70 backdrop-blur-sm hover:bg-white/90 rounded-2xl p-6 flex items-center gap-4 shadow-xl active:scale-95 transition-all border-2 border-dashed border-white/50"
-        >
-          <div className="w-16 h-16 bg-gradient-to-br from-gray-300 to-gray-400 rounded-full flex items-center justify-center text-3xl shadow-lg flex-shrink-0">
-            🧑
-          </div>
-          <div className="flex-1 text-left">
-            <h3 className="text-xl font-bold text-gray-900">Guest</h3>
-            <p className="text-sm text-gray-600 flex items-center gap-1 mt-1">
-              <Users className="w-4 h-4 text-gray-500" />
-              Limited access
-            </p>
-          </div>
-        </button>
+        {/* Profile tiles - large, tappable, clear */}
+        <div className="w-full max-w-sm space-y-4">
+          {allProfiles.map((profile) => (
+            <button
+              key={profile.id}
+              onClick={() => handleProfileClick(profile)}
+              className={`w-full bg-white/95 backdrop-blur-sm hover:bg-white rounded-2xl p-6 flex items-center gap-4 shadow-2xl active:scale-95 transition-all border-4 ${profile.role === 'parent' ? 'border-amber-400' : 'border-transparent hover:border-blue-300'
+                }`}
+            >
+              <div className={`w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-lg flex-shrink-0 ${profile.role === 'parent' ? 'bg-gradient-to-br from-amber-400 to-amber-500' : 'bg-gradient-to-br from-blue-400 to-blue-500'
+                }`}>
+                {profile.avatar}
+              </div>
+              <div className="flex-1 text-left">
+                <h3 className="text-xl font-bold text-gray-900">{profile.name}</h3>
+                <p className="text-sm text-gray-600 flex items-center gap-1 mt-1">
+                  {profile.role === 'parent' ? <Crown className="w-4 h-4 text-amber-500" /> : <Baby className="w-4 h-4 text-blue-500" />}
+                  {getRoleLabel(profile.role)}
+                  {profile.age && ` • ${profile.age} ${t('ageLabel')}`}
+                </p>
+              </div>
+              {profile.role === 'parent' && (
+                <div className="flex items-center gap-2 bg-amber-100 px-3 py-2 rounded-full">
+                  <Lock className="w-4 h-4 text-amber-700" />
+                  <span className="text-xs font-semibold text-amber-700">PIN</span>
+                </div>
+              )}
+            </button>
+          ))}
+
+        </div>
       </div>
     </div>
   );

@@ -101,7 +101,7 @@ export function PinModal({ isOpen, onClose, onSuccess, title, description }: Pin
                             disabled={isLoading || pin.length < 4}
                             className="flex-1 py-3 px-4 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                         >
-                            {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : t('confirm')}
+                            {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Confirm'}
                         </button>
                     </div>
                 </form>

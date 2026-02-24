@@ -31,16 +31,16 @@ export function ChildHomeScreenGood() {
   const allowedAppsList = ALLOWED_APPS.filter(app => app.allowed);
 
   return (
-    <div className="h-full bg-gradient-to-br from-teal-50 via-blue-50 to-purple-50">
+    <div className="h-full bg-gray-900 flex flex-col overflow-y-auto">
       {/* Header - clear info about current session */}
-      <div className="bg-gradient-to-r from-teal-600 to-teal-700 text-white px-6 py-4 shadow-lg">
+      <div className="bg-gray-800/80 backdrop-blur-md border-b border-gray-700 text-white px-6 py-4 shadow-lg sticky top-0 z-10">
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-10 h-10 bg-blue-400 rounded-full flex items-center justify-center text-xl">
+          <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-xl shadow-inner border border-white/10">
             👦
           </div>
           <div className="flex-1">
             <h1 className="text-xl font-bold">{t('hi')}, Miguel!</h1>
-            <div className="flex items-center gap-2 text-teal-100 text-sm">
+            <div className="flex items-center gap-2 text-teal-400 text-sm">
               <GraduationCap className="w-4 h-4" />
               <span>{t('schoolMode')}</span>
             </div>
@@ -48,20 +48,20 @@ export function ChildHomeScreenGood() {
         </div>
 
         {/* Timer - prominent, clear */}
-        <div className="bg-white/20 backdrop-blur-sm rounded-xl px-4 py-3 flex items-center justify-between">
+        <div className="bg-white/5 backdrop-blur-sm rounded-xl px-4 py-3 flex items-center justify-between border border-white/10">
           <div className="flex items-center gap-2">
-            <Clock className="w-5 h-5" />
+            <Clock className="w-5 h-5 text-teal-400" />
             <span className="font-semibold">{t('timeLeft')}:</span>
           </div>
-          <div className="text-2xl font-bold tabular-nums">
+          <div className="text-2xl font-bold tabular-nums text-teal-300">
             {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
           </div>
         </div>
       </div>
 
       {/* Content */}
-      <div className="px-6 py-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">
+      <div className="px-6 py-6 relative z-0">
+        <h2 className="text-lg font-semibold text-white mb-4">
           {t('allowedApps')}
         </h2>
 
@@ -79,7 +79,7 @@ export function ChildHomeScreenGood() {
                     Let's just use the class directly or a default. */}
                 {app.icon}
               </div>
-              <span className="text-xs font-medium text-gray-700 text-center leading-tight">
+              <span className="text-xs font-medium text-white text-center leading-tight">
                 {app.name}
               </span>
             </button>
@@ -87,8 +87,8 @@ export function ChildHomeScreenGood() {
         </div>
 
         {/* Helper message */}
-        <div className="bg-white rounded-xl p-4 shadow-sm border-2 border-teal-200">
-          <p className="text-sm text-gray-700 text-center">
+        <div className="bg-white/5 backdrop-blur-md rounded-xl p-4 shadow-sm border border-teal-500/30">
+          <p className="text-sm text-teal-100 text-center">
             📖 {t('schoolAppsOnly')}
           </p>
         </div>
@@ -173,8 +173,8 @@ function BuyGemsButton() {
         isOpen={showPin}
         onClose={() => setShowPin(false)}
         onSuccess={handlePinSuccess}
-        title={t('pinRequest')}
-        description={`${t('pinRequestDesc')} (₱${PRICE})`}
+        title="PIN Request"
+        description={`Parental PIN required for purchase (₱${PRICE})`}
       />
 
       <button
