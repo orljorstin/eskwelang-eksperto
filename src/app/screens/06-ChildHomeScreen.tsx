@@ -31,7 +31,7 @@ export function ChildHomeScreenGood() {
   const allowedAppsList = ALLOWED_APPS.filter(app => app.allowed);
 
   return (
-    <div className="h-full bg-gray-900 flex flex-col overflow-y-auto">
+    <div className="h-full bg-gradient-to-br from-teal-50 via-blue-50 to-purple-50 flex flex-col overflow-y-auto">
       {/* Header - clear info about current session */}
       <div className="bg-gray-800/80 backdrop-blur-md border-b border-gray-700 text-white px-6 py-4 shadow-lg sticky top-0 z-10">
         <div className="flex items-center gap-3 mb-2">
@@ -61,7 +61,7 @@ export function ChildHomeScreenGood() {
 
       {/* Content */}
       <div className="px-6 py-6 relative z-0">
-        <h2 className="text-lg font-semibold text-white mb-4">
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">
           {t('allowedApps')}
         </h2>
 
@@ -79,7 +79,7 @@ export function ChildHomeScreenGood() {
                     Let's just use the class directly or a default. */}
                 {app.icon}
               </div>
-              <span className="text-xs font-medium text-white text-center leading-tight">
+              <span className="text-xs font-medium text-gray-700 text-center leading-tight">
                 {app.name}
               </span>
             </button>
@@ -87,8 +87,8 @@ export function ChildHomeScreenGood() {
         </div>
 
         {/* Helper message */}
-        <div className="bg-white/5 backdrop-blur-md rounded-xl p-4 shadow-sm border border-teal-500/30">
-          <p className="text-sm text-teal-100 text-center">
+        <div className="bg-white rounded-xl p-4 shadow-sm border-2 border-teal-200">
+          <p className="text-sm text-gray-700 text-center">
             📖 {t('schoolAppsOnly')}
           </p>
         </div>
