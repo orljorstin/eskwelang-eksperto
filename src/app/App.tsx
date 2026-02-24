@@ -21,6 +21,7 @@ import { LanguageScreen } from './screens/13-LanguageScreen';
 import { LauncherSettingsScreen } from './screens/14-LauncherSettingsScreen';
 import { SupportScreen } from './screens/15-SupportScreen';
 import { AdvancedSettingsScreen } from './screens/16-AdvancedSettingsScreen';
+import { RecentActivitiesScreen } from './screens/17-RecentActivitiesScreen';
 
 // Protect routes that require parent authentication
 function ProtectedRoute({ requireParent }: { requireParent?: boolean }) {
@@ -85,6 +86,7 @@ export default function App() {
                 <Route path="/spending-protection" element={<SpendingProtectionScreenGood />} />
                 <Route path="/blocked" element={<BlockedActionScreenGood />} />
                 <Route path="/create-profile" element={<CreateProfileScreen />} />
+                <Route path="/recent-activities" element={<RecentActivitiesScreen />} />
 
                 {/* Settings Sub-pages */}
                 <Route path="/settings/language" element={<LanguageScreen />} />

@@ -152,11 +152,16 @@ export function ParentDashboardScreenGood() {
               </div>
             </div>
 
-            {/* Recent Activity Placeholder */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            {/* Recent Activity */}
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-8">
               <div className="px-4 py-3 border-b border-gray-100 flex justify-between items-center">
                 <h3 className="text-sm font-bold text-gray-900">{t('activity')}</h3>
-                <button className="text-xs text-teal-600 font-medium hover:underline">View All</button>
+                <button
+                  onClick={() => navigate('/recent-activities')}
+                  className="text-xs text-teal-600 font-medium hover:underline"
+                >
+                  View All
+                </button>
               </div>
               <div className="p-8 text-center text-gray-400 text-sm">
                 {t('noActivity')}
