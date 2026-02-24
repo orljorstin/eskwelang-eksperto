@@ -50,97 +50,109 @@ export function SignupScreenGood() {
   };
 
   return (
-    <div className="h-full bg-white flex flex-col">
+    <div className="h-full bg-gray-900 flex flex-col px-6 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] right-[-10%] w-64 h-64 bg-teal-600/20 rounded-full blur-3xl mix-blend-screen" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-64 h-64 bg-purple-600/20 rounded-full blur-3xl mix-blend-screen" />
+      </div>
+
       {/* Header */}
-      <div className="flex-none px-6 pt-12 pb-6 bg-teal-600 text-white rounded-b-[2.5rem] shadow-lg">
-        <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mb-4 backdrop-blur-sm">
-          <User className="w-8 h-8 text-white" />
+      <div className="flex-none pt-12 pb-6 relative z-10 text-center">
+        <div className="w-20 h-20 bg-gray-800 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl border border-gray-700">
+          <User className="w-10 h-10 text-teal-400" />
         </div>
-        <h1 className="text-2xl font-bold mb-1">{t('signupTitle')}</h1>
-        <p className="text-teal-100 text-sm">{t('signupSubtitle')}</p>
+        <h1 className="text-2xl font-bold text-white mb-2">{t('signupTitle')}</h1>
+        <p className="text-gray-400 text-sm">{t('signupSubtitle')}</p>
       </div>
 
       {/* Form */}
-      <div className="flex-1 px-6 py-8 overflow-y-auto">
-        <form onSubmit={handleSignup} className="space-y-6">
-          {/* Full Name */}
-          <div className="space-y-2">
-            <label className="text-sm font-semibold text-gray-700 ml-1">{t('fullNameLabel')}</label>
-            <div className="relative">
-              <User className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
-              <input
-                type="text"
-                required
-                className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all outline-none"
-                placeholder="Juan Dela Cruz"
-                value={formData.fullName}
-                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+      <div className="flex-1 py-4 overflow-y-auto relative z-10 scrollbar-none">
+        <div className="w-full max-w-sm mx-auto">
+          <form onSubmit={handleSignup} className="space-y-6">
+            {/* Full Name */}
+            <div className="space-y-2">
+              <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider ml-1">{t('fullNameLabel')}</label>
+              <div className="relative">
+                <User className="absolute left-4 top-3.5 w-5 h-5 text-gray-500" />
+                <input
+                  type="text"
+                  required
+                  className="w-full pl-12 pr-4 py-3.5 bg-gray-800 border-2 border-gray-700 text-white rounded-xl focus:ring-4 focus:ring-teal-500/20 focus:border-teal-500 transition-all outline-none placeholder:text-gray-600"
+                  placeholder="Juan Dela Cruz"
+                  value={formData.fullName}
+                  onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                />
+              </div>
+            </div>
+
+            {/* Mobile Number */}
+            <div className="space-y-2">
+              <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider ml-1">{t('mobileLabel')}</label>
+              <div className="relative">
+                <Smartphone className="absolute left-4 top-3.5 w-5 h-5 text-gray-500" />
+                <input
+                  type="tel"
+                  required
+                  className="w-full pl-12 pr-4 py-3.5 bg-gray-800 border-2 border-gray-700 text-white rounded-xl focus:ring-4 focus:ring-teal-500/20 focus:border-teal-500 transition-all outline-none placeholder:text-gray-600"
+                  placeholder="0912 345 6789"
+                  value={formData.mobile}
+                  onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
+                />
+              </div>
+            </div>
+
+            {/* PIN Setup */}
+            <div>
+              <PinInput
+                label={t('createPinLabel')}
+                value={formData.pin}
+                onChange={(val) => setFormData({ ...formData, pin: val })}
+                theme="dark"
+              />
+              <p className="text-xs text-gray-500 ml-1 mt-1">{t('pinHelper')}</p>
+            </div>
+
+            {/* Confirm PIN */}
+            <div>
+              <PinInput
+                label={t('confirmPinLabel')}
+                value={formData.confirmPin}
+                onChange={(val) => setFormData({ ...formData, confirmPin: val })}
+                theme="dark"
               />
             </div>
-          </div>
 
-          {/* Mobile Number */}
-          <div className="space-y-2">
-            <label className="text-sm font-semibold text-gray-700 ml-1">{t('mobileLabel')}</label>
-            <div className="relative">
-              <Smartphone className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
-              <input
-                type="tel"
-                required
-                className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all outline-none"
-                placeholder="0912 345 6789"
-                value={formData.mobile}
-                onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
-              />
+            {error && (
+              <div className="flex items-center justify-center p-3 bg-red-500/10 border border-red-500/20 text-red-300 text-sm rounded-xl font-medium animate-in fade-in">
+                {error}
+              </div>
+            )}
+
+            <div className="pt-2 pb-6">
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full bg-teal-600 text-white py-4 rounded-xl font-bold text-lg shadow-lg shadow-teal-500/20 hover:bg-teal-500 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 group"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-6 h-6 animate-spin" />
+                    {t('signupTitle')}...
+                  </>
+                ) : (
+                  t('signupTitle')
+                )}
+              </button>
             </div>
-          </div>
 
-          {/* PIN Setup */}
-          <div>
-            <PinInput
-              label={t('createPinLabel')}
-              value={formData.pin}
-              onChange={(val) => setFormData({ ...formData, pin: val })}
-            />
-            <p className="text-xs text-gray-500 ml-1 mt-1">{t('pinHelper')}</p>
-          </div>
-
-          {/* Confirm PIN */}
-          <PinInput
-            label={t('confirmPinLabel')}
-            value={formData.confirmPin}
-            onChange={(val) => setFormData({ ...formData, confirmPin: val })}
-          />
-
-          {error && (
-            <div className="p-3 bg-red-50 text-red-600 text-sm rounded-lg text-center font-medium animate-in fade-in">
-              {error}
+            <div className="text-center pb-8">
+              <button type="button" onClick={() => navigate('/login')} className="text-sm text-gray-500 hover:text-gray-300 transition-colors">
+                Already have an account? <span className="text-teal-500 hover:underline">Login</span>
+              </button>
             </div>
-          )}
-
-          <div className="pt-4">
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full bg-teal-600 text-white py-4 rounded-xl font-bold shadow-lg shadow-teal-200 hover:bg-teal-700 hover:shadow-xl active:scale-[0.98] transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-            >
-              {isLoading ? (
-                <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                  {t('signupTitle')}...
-                </>
-              ) : (
-                t('signupTitle')
-              )}
-            </button>
-          </div>
-
-          <div className="text-center">
-            <button type="button" onClick={() => navigate('/login')} className="text-sm text-teal-600 font-medium">
-              Already have an account? Login
-            </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   );

@@ -39,11 +39,18 @@ export function CreateProfileScreen() {
     return (
         <div className="h-full bg-gray-50 flex flex-col">
             {/* Header */}
-            <div className="bg-white px-6 py-4 border-b border-gray-200 flex items-center gap-3">
-                <button onClick={() => navigate(-1)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                    <ArrowLeft className="w-6 h-6 text-gray-600" />
-                </button>
-                <h1 className="text-xl font-bold text-gray-900">{t('addChildProfile')}</h1>
+            <div className="px-6 py-4 bg-gray-900 text-white relative overflow-hidden border-b border-gray-800 flex items-center gap-3">
+                {/* Background decoration */}
+                <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+                    <div className="absolute top-[-50%] right-[-10%] w-64 h-64 bg-teal-600/30 rounded-full blur-3xl mix-blend-screen" />
+                    <div className="absolute bottom-[-50%] left-[-10%] w-64 h-64 bg-purple-600/30 rounded-full blur-3xl mix-blend-screen" />
+                </div>
+                <div className="relative z-10 flex items-center gap-3 w-full">
+                    <button onClick={() => navigate(-1)} className="p-2 -ml-2 hover:bg-white/10 rounded-full transition-colors">
+                        <ArrowLeft className="w-6 h-6 text-gray-400 hover:text-white" />
+                    </button>
+                    <h1 className="text-xl font-bold text-white">{t('addChildProfile')}</h1>
+                </div>
             </div>
 
             <div className="flex-1 overflow-y-auto px-6 py-6">

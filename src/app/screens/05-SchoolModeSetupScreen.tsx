@@ -34,32 +34,40 @@ export function SchoolModeSetupScreenGood() {
   return (
     <div className="h-full bg-white flex flex-col">
       {/* Header with progress */}
-      <div className="px-6 py-4 bg-gradient-to-r from-teal-500 to-teal-600 text-white">
-        <h1 className="text-xl font-bold mb-3">I-setup ang Session</h1>
-
-        {/* Progress indicator - clear steps */}
-        <div className="flex items-center gap-2">
-          {[1, 2, 3].map((num) => (
-            <div key={num} className="flex items-center flex-1">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all ${step >= num
-                  ? 'bg-white text-teal-600'
-                  : 'bg-teal-400 text-white'
-                }`}>
-                {step > num ? <CircleCheck className="w-5 h-5" /> : num}
-              </div>
-              {num < 3 && (
-                <div className={`flex-1 h-1 mx-1 rounded transition-all ${step > num ? 'bg-white' : 'bg-teal-400'
-                  }`} />
-              )}
-            </div>
-          ))}
+      <div className="px-6 py-4 bg-gray-900 text-white relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+          <div className="absolute top-[-50%] right-[-10%] w-64 h-64 bg-teal-600/30 rounded-full blur-3xl mix-blend-screen" />
+          <div className="absolute bottom-[-50%] left-[-10%] w-64 h-64 bg-purple-600/30 rounded-full blur-3xl mix-blend-screen" />
         </div>
 
-        <p className="text-teal-100 text-sm mt-3">
-          {step === 1 && 'Hakbang 1: Piliin ang bata'}
-          {step === 2 && 'Hakbang 2: Piliin ang mode'}
-          {step === 3 && 'Hakbang 3: Piliin ang oras'}
-        </p>
+        <div className="relative z-10">
+          <h1 className="text-xl font-bold mb-3">I-setup ang Session</h1>
+
+          {/* Progress indicator - clear steps */}
+          <div className="flex items-center gap-2">
+            {[1, 2, 3].map((num) => (
+              <div key={num} className="flex items-center flex-1">
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all ${step >= num
+                  ? 'bg-teal-400 text-gray-900 shadow-[0_0_15px_rgba(45,212,191,0.5)]'
+                  : 'bg-white/10 text-white/50 border border-white/10'
+                  }`}>
+                  {step > num ? <CircleCheck className="w-5 h-5 text-gray-900" /> : num}
+                </div>
+                {num < 3 && (
+                  <div className={`flex-1 h-1 mx-1 rounded transition-all ${step > num ? 'bg-teal-400' : 'bg-white/10'
+                    }`} />
+                )}
+              </div>
+            ))}
+          </div>
+
+          <p className="text-gray-400 text-sm mt-3">
+            {step === 1 && 'Hakbang 1: Piliin ang bata'}
+            {step === 2 && 'Hakbang 2: Piliin ang mode'}
+            {step === 3 && 'Hakbang 3: Piliin ang oras'}
+          </p>
+        </div>
       </div>
 
       {/* Content */}
@@ -75,8 +83,8 @@ export function SchoolModeSetupScreenGood() {
                 key={child.name}
                 onClick={() => setSelectedChild(child.name)}
                 className={`w-full p-5 rounded-xl border-3 transition-all flex items-center gap-4 ${selectedChild === child.name
-                    ? 'border-teal-500 bg-teal-50 shadow-lg'
-                    : 'border-gray-200 bg-white hover:border-gray-300'
+                  ? 'border-teal-500 bg-teal-50 shadow-lg'
+                  : 'border-gray-200 bg-white hover:border-gray-300'
                   }`}
               >
                 <div className="w-14 h-14 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full flex items-center justify-center text-2xl">
@@ -104,8 +112,8 @@ export function SchoolModeSetupScreenGood() {
             <button
               onClick={() => setSelectedMode('school')}
               className={`w-full p-6 rounded-xl border-3 transition-all ${selectedMode === 'school'
-                  ? 'border-teal-500 bg-teal-50 shadow-lg'
-                  : 'border-gray-200 bg-white hover:border-gray-300'
+                ? 'border-teal-500 bg-teal-50 shadow-lg'
+                : 'border-gray-200 bg-white hover:border-gray-300'
                 }`}
             >
               <div className="flex items-start gap-4">
@@ -127,8 +135,8 @@ export function SchoolModeSetupScreenGood() {
             <button
               onClick={() => setSelectedMode('play')}
               className={`w-full p-6 rounded-xl border-3 transition-all ${selectedMode === 'play'
-                  ? 'border-teal-500 bg-teal-50 shadow-lg'
-                  : 'border-gray-200 bg-white hover:border-gray-300'
+                ? 'border-teal-500 bg-teal-50 shadow-lg'
+                : 'border-gray-200 bg-white hover:border-gray-300'
                 }`}
             >
               <div className="flex items-start gap-4">
@@ -163,8 +171,8 @@ export function SchoolModeSetupScreenGood() {
                   key={duration.value}
                   onClick={() => setSelectedDuration(duration.value)}
                   className={`h-16 rounded-xl border-3 transition-all flex items-center justify-center gap-2 ${selectedDuration === duration.value
-                      ? 'border-teal-500 bg-teal-50 shadow-lg'
-                      : 'border-gray-200 bg-white hover:border-gray-300'
+                    ? 'border-teal-500 bg-teal-50 shadow-lg'
+                    : 'border-gray-200 bg-white hover:border-gray-300'
                     }`}
                 >
                   <Clock className={`w-5 h-5 ${selectedDuration === duration.value ? 'text-teal-600' : 'text-gray-400'

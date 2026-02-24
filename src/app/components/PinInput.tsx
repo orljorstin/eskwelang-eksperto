@@ -11,6 +11,7 @@ interface PinInputProps {
     maxLength?: number;
     showVisibilityToggle?: boolean;
     className?: string;
+    theme?: 'light' | 'dark';
 }
 
 export function PinInput({
@@ -23,6 +24,7 @@ export function PinInput({
     maxLength = 6,
     showVisibilityToggle = true,
     className = "",
+    theme = "light",
 }: PinInputProps) {
     const [showPin, setShowPin] = useState(false);
 
@@ -46,8 +48,10 @@ export function PinInput({
                     pattern="\d*"
                     inputMode="numeric"
                     autoFocus={autoFocus}
-                    className={`w-full pl-12 pr-12 py-3.5 bg-gray-50 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all outline-none font-mono tracking-widest text-lg text-gray-900 placeholder-gray-400 ${error ? 'border-red-500 bg-red-50' : 'border-gray-200'
-                        }`}
+                    className={`w-full pl-12 pr-12 py-3.5 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all outline-none font-mono tracking-widest text-lg ${theme === 'dark'
+                        ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-500'
+                        : 'bg-gray-50 border-gray-200 text-gray-900 placeholder-gray-400'
+                        } ${error ? 'border-red-500 bg-red-50' : ''}`}
                     placeholder={placeholder}
                 />
                 {showVisibilityToggle && (

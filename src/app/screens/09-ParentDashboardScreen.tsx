@@ -31,49 +31,57 @@ export function ParentDashboardScreenGood() {
   return (
     <div className="h-full bg-gray-50 flex flex-col">
       {/* Header */}
-      <div className="px-6 py-6 bg-gradient-to-r from-teal-600 to-teal-700 text-white rounded-b-3xl shadow-lg">
-        <div className="flex justify-between items-start mb-4">
-          <div>
-            <h1 className="text-2xl font-bold">{t('hi')}, {getGreetingName()}!</h1>
-            <p className="text-teal-100 text-sm">{t('summary')}</p>
-          </div>
-          <div className="bg-white/20 p-2 rounded-full cursor-pointer hover:bg-white/30 transition-colors" onClick={() => navigate('/settings')}>
-            <Users className="w-5 h-5 text-white" />
-          </div>
+      <div className="px-6 py-6 bg-gray-900 text-white rounded-b-3xl shadow-lg relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+          <div className="absolute top-[-50%] right-[-10%] w-64 h-64 bg-teal-600/30 rounded-full blur-3xl mix-blend-screen" />
+          <div className="absolute bottom-[-50%] left-[-10%] w-64 h-64 bg-purple-600/30 rounded-full blur-3xl mix-blend-screen" />
         </div>
 
-        {/* Carousel / Quick Switcher */}
-        {childProfiles.length > 0 ? (
-          <div className="mt-4">
-            <div className="flex items-center justify-between">
-              <button onClick={prevChild} className="p-1 hover:bg-white/20 rounded-full">
-                <ArrowRight className="w-5 h-5 text-white rotate-180" />
-              </button>
-
-              <div className="flex flex-col items-center">
-                <div className="text-4xl mb-1">{currentChild.avatar}</div>
-                <span className="font-bold text-lg">{currentChild.name}</span>
-              </div>
-
-              <button onClick={nextChild} className="p-1 hover:bg-white/20 rounded-full">
-                <ArrowRight className="w-5 h-5 text-white" />
-              </button>
+        <div className="relative z-10">
+          <div className="flex justify-between items-start mb-4">
+            <div>
+              <h1 className="text-2xl font-bold">{t('hi')}, {getGreetingName()}!</h1>
+              <p className="text-gray-400 text-sm">{t('summary')}</p>
             </div>
-            <div className="flex justify-center gap-1 mt-2">
-              {childProfiles.map((_, idx) => (
-                <div key={idx} className={`w-1.5 h-1.5 rounded-full ${idx === activeIndex ? 'bg-white' : 'bg-white/40'}`} />
-              ))}
+            <div className="bg-white/10 p-2 rounded-full cursor-pointer hover:bg-white/20 border border-white/10 transition-colors" onClick={() => navigate('/settings')}>
+              <Users className="w-5 h-5 text-teal-400" />
             </div>
           </div>
-        ) : (
-          <button
-            onClick={() => navigate('/create-profile')}
-            className="bg-white/20 hover:bg-white/30 text-white text-xs px-3 py-1.5 rounded-full flex items-center gap-1 transition-colors"
-          >
-            <UserPlus className="w-3 h-3" />
-            {t('addChildProfile')}
-          </button>
-        )}
+
+          {/* Carousel / Quick Switcher */}
+          {childProfiles.length > 0 ? (
+            <div className="mt-4">
+              <div className="flex items-center justify-between">
+                <button onClick={prevChild} className="p-1 hover:bg-white/10 rounded-full transition-colors">
+                  <ArrowRight className="w-5 h-5 text-gray-400 hover:text-white rotate-180 transition-colors" />
+                </button>
+
+                <div className="flex flex-col items-center">
+                  <div className="text-4xl mb-1">{currentChild.avatar}</div>
+                  <span className="font-bold text-lg text-white">{currentChild.name}</span>
+                </div>
+
+                <button onClick={nextChild} className="p-1 hover:bg-white/10 rounded-full transition-colors">
+                  <ArrowRight className="w-5 h-5 text-gray-400 hover:text-white transition-colors" />
+                </button>
+              </div>
+              <div className="flex justify-center gap-1 mt-2">
+                {childProfiles.map((_, idx) => (
+                  <div key={idx} className={`w-1.5 h-1.5 rounded-full ${idx === activeIndex ? 'bg-teal-400 shadow-[0_0_8px_rgba(45,212,191,0.8)]' : 'bg-white/20'}`} />
+                ))}
+              </div>
+            </div>
+          ) : (
+            <button
+              onClick={() => navigate('/create-profile')}
+              className="bg-white/10 hover:bg-white/20 text-white border border-white/10 text-xs px-3 py-1.5 rounded-full flex items-center gap-1 transition-colors"
+            >
+              <UserPlus className="w-3 h-3 text-teal-400" />
+              {t('addChildProfile')}
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Content */}
