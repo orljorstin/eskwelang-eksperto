@@ -33,28 +33,36 @@ export function ChildHomeScreenGood() {
   return (
     <div className="h-full bg-gradient-to-br from-teal-50 via-blue-50 to-purple-50 flex flex-col overflow-y-auto">
       {/* Header - clear info about current session */}
-      <div className="bg-gray-800/80 backdrop-blur-md border-b border-gray-700 text-white px-6 py-4 shadow-lg sticky top-0 z-10">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-xl shadow-inner border border-white/10">
-            👦
-          </div>
-          <div className="flex-1">
-            <h1 className="text-xl font-bold">{t('hi')}, Miguel!</h1>
-            <div className="flex items-center gap-2 text-teal-400 text-sm">
-              <GraduationCap className="w-4 h-4" />
-              <span>{t('schoolMode')}</span>
-            </div>
-          </div>
+      <div className="bg-gray-900 border-b border-gray-700 text-white px-6 py-4 shadow-lg sticky top-0 z-10 relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+          <div className="absolute top-[-50%] right-[-10%] w-64 h-64 bg-teal-600/40 rounded-full blur-3xl mix-blend-screen" />
+          <div className="absolute bottom-[-50%] left-[-10%] w-64 h-64 bg-purple-600/40 rounded-full blur-3xl mix-blend-screen" />
         </div>
 
-        {/* Timer - prominent, clear */}
-        <div className="bg-white/5 backdrop-blur-sm rounded-xl px-4 py-3 flex items-center justify-between border border-white/10">
-          <div className="flex items-center gap-2">
-            <Clock className="w-5 h-5 text-teal-400" />
-            <span className="font-semibold">{t('timeLeft')}:</span>
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-xl shadow-inner border border-white/10">
+              👦
+            </div>
+            <div className="flex-1">
+              <h1 className="text-xl font-bold">{t('hi')}, Miguel!</h1>
+              <div className="flex items-center gap-2 text-teal-400 text-sm">
+                <GraduationCap className="w-4 h-4" />
+                <span>{t('schoolMode')}</span>
+              </div>
+            </div>
           </div>
-          <div className="text-2xl font-bold tabular-nums text-teal-300">
-            {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
+
+          {/* Timer - prominent, clear */}
+          <div className="bg-white/5 backdrop-blur-sm rounded-xl px-4 py-3 flex items-center justify-between border border-white/10">
+            <div className="flex items-center gap-2">
+              <Clock className="w-5 h-5 text-teal-400" />
+              <span className="font-semibold">{t('timeLeft')}:</span>
+            </div>
+            <div className="text-2xl font-bold tabular-nums text-teal-300">
+              {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
+            </div>
           </div>
         </div>
       </div>

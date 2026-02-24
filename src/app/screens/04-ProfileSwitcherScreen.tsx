@@ -59,7 +59,7 @@ export function ProfileSwitcherScreenGood() {
         {/* Header - clear question */}
         <div className="text-center mb-12">
           <h1 className="text-3xl font-bold text-white mb-3">
-            Who is watching?
+            {t('whoIsUsing')}
           </h1>
           <p className="text-teal-100 text-base">
             {t('selectProfile')}
