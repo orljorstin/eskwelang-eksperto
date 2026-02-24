@@ -7,6 +7,11 @@ import { Play, Pause, Square, AlertTriangle, CheckCircle, XCircle } from 'lucide
 import { useNavigate } from 'react-router-dom';
 import { useT } from '../../context/LanguageContext';
 import { ALLOWED_APPS } from '../../constants/allowedApps';
+import { CalculatorApp } from '../apps/CalculatorApp';
+import { BrowserApp } from '../apps/BrowserApp';
+import { NotesApp } from '../apps/NotesApp';
+import { DictionaryApp } from '../apps/DictionaryApp';
+import { PDFReaderApp } from '../apps/PDFReaderApp';
 
 // Types for the session
 type SessionStatus = 'setup' | 'guide' | 'running' | 'paused' | 'completed' | 'summary';
@@ -22,6 +27,7 @@ export function SessionScreen() {
     const [selectedProfileId, setSelectedProfileId] = useState<string>('');
     const [duration, setDuration] = useState<number>(25); // Minutes
     const [subject] = useState<string>('Math'); // Could be dynamic
+    const [activeApp, setActiveApp] = useState<string | null>(null);
 
     // Timer State
     const [timeLeft, setTimeLeft] = useState<number>(25 * 60);
@@ -262,12 +268,23 @@ export function SessionScreen() {
                         </p>
                     </div>
 
-                    {/* Alowed Apps Grid (Using Constant) */}
-                    <div className="w-full max-w-md px-6">
+                    {/* Allowed Apps Grid (Using Constant) */}
+                    <div className="w-full max-w-md px-6 z-10">
                         <p className="text-slate-500 text-xs font-bold uppercase mb-4 text-center">{t('allowedApps')}</p>
                         <div className="grid grid-cols-4 gap-4">
-                            {ALLOWED_APPS.filter(app => app.allowed).slice(0, 4).map((app) => (
-                                <button key={app.name} className="flex flex-col items-center gap-2 group">
+                            {ALLOWED_APPS.filter(app => app.allowed).slice(0, 8).map((app) => (
+                                <button
+                                    key={app.name}
+                                    onClick={() => {
+                                        // Open specific embedded apps
+                                        if (app.name === 'Calculator') setActiveApp('calculator');
+                                        else if (app.name === 'Browser') setActiveApp('browser');
+                                        else if (app.name === 'Notes') setActiveApp('notes');
+                                        else if (app.name === 'Dictionary') setActiveApp('dictionary');
+                                        else if (app.name === 'PDF Reader') setActiveApp('pdf');
+                                    }}
+                                    className="flex flex-col items-center gap-2 group"
+                                >
                                     <div className={`w-14 h-14 ${app.color || 'bg-gray-500'} rounded-2xl flex items-center justify-center text-2xl shadow-lg group-active:scale-95 transition-transform`}>
                                         {app.icon}
                                     </div>
@@ -278,8 +295,15 @@ export function SessionScreen() {
                     </div>
                 </div>
 
+                {/* Embedded Apps Container */}
+                {activeApp === 'calculator' && <CalculatorApp onClose={() => setActiveApp(null)} />}
+                {activeApp === 'browser' && <BrowserApp onClose={() => setActiveApp(null)} />}
+                {activeApp === 'notes' && <NotesApp onClose={() => setActiveApp(null)} />}
+                {activeApp === 'dictionary' && <DictionaryApp onClose={() => setActiveApp(null)} />}
+                {activeApp === 'pdf' && <PDFReaderApp onClose={() => setActiveApp(null)} />}
+
                 {/* Controls */}
-                <div className="p-8 pb-12 flex items-center justify-center gap-8 z-10">
+                <div className={`p-8 pb-12 flex items-center justify-center gap-8 z-10 ${activeApp ? 'hidden' : ''}`}>
                     <button
                         onClick={togglePause}
                         className="w-16 h-16 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all backdrop-blur-sm"
