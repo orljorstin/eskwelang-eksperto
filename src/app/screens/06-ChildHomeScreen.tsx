@@ -31,98 +31,101 @@ export function ChildHomeScreenGood() {
   const allowedAppsList = ALLOWED_APPS.filter(app => app.allowed);
 
   return (
-    <div className="h-full bg-gradient-to-br from-teal-50 via-blue-50 to-purple-50 flex flex-col overflow-y-auto">
+    <div className="h-full bg-gradient-to-br from-teal-50 via-blue-50 to-purple-50 flex flex-col overflow-hidden">
       {/* Header - clear info about current session */}
-      <div className="bg-gray-900 border-b border-gray-700 text-white px-6 pt-8 pb-6 shadow-xl sticky top-0 z-30 overflow-hidden">
+      <div className="shrink-0 bg-gray-900 border-b border-gray-700 text-white px-6 pt-10 pb-6 shadow-xl z-30 relative overflow-hidden">
         {/* Background decoration */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
           <div className="absolute top-[-50%] right-[-10%] w-64 h-64 bg-teal-600/40 rounded-full blur-3xl mix-blend-screen" />
           <div className="absolute bottom-[-50%] left-[-10%] w-64 h-64 bg-purple-600/40 rounded-full blur-3xl mix-blend-screen" />
         </div>
 
         <div className="relative z-10 flex flex-col gap-5">
           <div className="flex items-center gap-4 mt-2">
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-2xl shadow-inner border border-white/10">
+            <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-2xl shadow-inner border border-white/10 shrink-0">
               👦
             </div>
-            <div className="flex-1">
-              <h1 className="text-2xl font-bold tracking-tight">{t('hi')}, Miguel!</h1>
+            <div className="flex-1 min-w-0">
+              <h1 className="text-2xl font-bold tracking-tight truncate">{t('hi')}, Miguel!</h1>
               <div className="flex items-center gap-1.5 text-teal-300 text-sm mt-1 font-medium bg-white/5 w-fit px-2.5 py-1 rounded-full border border-white/10">
-                <GraduationCap className="w-4 h-4" />
-                <span>{t('schoolMode')}</span>
+                <GraduationCap className="w-4 h-4 shrink-0" />
+                <span className="truncate">{t('schoolMode')}</span>
               </div>
             </div>
           </div>
 
           {/* Timer - prominent, clear */}
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl px-5 py-4 flex items-center justify-between border border-white/10 shadow-lg">
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl px-5 py-4 flex items-center justify-between border border-white/10 shadow-lg shrink-0">
             <div className="flex items-center gap-2.5">
-              <Clock className="w-6 h-6 text-teal-300" />
-              <span className="font-semibold text-white/90 text-lg">{t('timeLeft')}:</span>
+              <Clock className="w-6 h-6 text-teal-300 shrink-0" />
+              <span className="font-semibold text-white/90 text-lg whitespace-nowrap">{t('timeLeft')}:</span>
             </div>
-            <div className="text-3xl font-bold tabular-nums text-teal-300 tracking-tight">
+            <div className="text-3xl font-bold tabular-nums text-teal-300 tracking-tight shrink-0">
               {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
             </div>
           </div>
         </div>
       </div>
 
-      {/* Content */}
-      <div className="px-6 py-6 relative z-0">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">
-          {t('allowedApps')}
-        </h2>
+      {/* Main Scrollable Content */}
+      <div className="flex-1 overflow-y-auto relative z-0 custom-scrollbar">
+        {/* Content */}
+        <div className="px-6 py-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">
+            {t('allowedApps')}
+          </h2>
 
-        {/* App grid - simple, clear */}
-        <div className="grid grid-cols-3 gap-4 mb-6">
-          {allowedAppsList.slice(0, 6).map((app) => (
-            <button
-              key={app.id}
-              className="flex flex-col items-center gap-2 p-4 bg-white rounded-2xl shadow-md hover:shadow-lg active:scale-95 transition-all"
-            >
-              <div className={`w-14 h-14 bg-gradient-to-br transition-all flex items-center justify-center text-2xl shadow-md rounded-2xl ${app.color ? app.color.replace('bg-', '') : 'bg-gray-100' // Handle color mapping if distinct
-                } ${app.color ? app.color : 'bg-gray-100'}`}>
-                {/* Note: ALLOWED_APPS has 'bg-green-500' format, original had 'from-green-400 to-green-500'. 
-                    Adjusting for simplicity or we can update constant. 
-                    Let's just use the class directly or a default. */}
-                {app.icon}
-              </div>
-              <span className="text-xs font-medium text-gray-700 text-center leading-tight">
-                {app.name}
-              </span>
-            </button>
-          ))}
-        </div>
-
-        {/* Helper message */}
-        <div className="bg-white rounded-xl p-4 shadow-sm border-2 border-teal-200">
-          <p className="text-sm text-gray-700 text-center">
-            📖 {t('schoolAppsOnly')}
-          </p>
-        </div>
-      </div>
-
-      {/* Buy Gems Simulation (Financial Protection Test) */}
-      <div className="px-6 pb-6">
-        <div className="bg-gradient-to-r from-amber-100 to-orange-100 rounded-xl p-4 border border-orange-200">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center text-white font-bold">$</div>
-              <span className="font-bold text-orange-900">{t('gameStore')}</span>
-            </div>
-            <span className="text-xs text-orange-700 bg-white/50 px-2 py-1 rounded">{t('simulation')}</span>
+          {/* App grid - simple, clear */}
+          <div className="grid grid-cols-3 gap-4 mb-6">
+            {allowedAppsList.slice(0, 6).map((app) => (
+              <button
+                key={app.id}
+                className="flex flex-col items-center gap-2 p-4 bg-white rounded-2xl shadow-md hover:shadow-lg active:scale-95 transition-all"
+              >
+                <div className={`w-14 h-14 bg-gradient-to-br transition-all flex items-center justify-center text-2xl shadow-md rounded-2xl ${app.color ? app.color.replace('bg-', '') : 'bg-gray-100' // Handle color mapping if distinct
+                  } ${app.color ? app.color : 'bg-gray-100'}`}>
+                  {/* Note: ALLOWED_APPS has 'bg-green-500' format, original had 'from-green-400 to-green-500'. 
+                      Adjusting for simplicity or we can update constant. 
+                      Let's just use the class directly or a default. */}
+                  {app.icon}
+                </div>
+                <span className="text-xs font-medium text-gray-700 text-center leading-tight">
+                  {app.name}
+                </span>
+              </button>
+            ))}
           </div>
-          <p className="text-sm text-orange-800 mb-3">{t('testControls')}</p>
-          <BuyGemsButton />
-        </div>
-      </div>
 
-      {/* Request more time - prominent secondary button */}
-      <div className="px-6 pb-6 text-center">
-        <button className="w-full py-3.5 bg-transparent border-2 border-teal-600 text-teal-700 font-bold rounded-xl active:scale-95 hover:bg-teal-50 transition-all flex items-center justify-center gap-2">
-          <Clock className="w-5 h-5" />
-          {t('requestTime')}
-        </button>
+          {/* Helper message */}
+          <div className="bg-white rounded-xl p-4 shadow-sm border-2 border-teal-200">
+            <p className="text-sm text-gray-700 text-center">
+              📖 {t('schoolAppsOnly')}
+            </p>
+          </div>
+        </div>
+
+        {/* Buy Gems Simulation (Financial Protection Test) */}
+        <div className="px-6 pb-6">
+          <div className="bg-gradient-to-r from-amber-100 to-orange-100 rounded-xl p-4 border border-orange-200">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center text-white font-bold shrink-0">$</div>
+                <span className="font-bold text-orange-900">{t('gameStore')}</span>
+              </div>
+              <span className="text-xs text-orange-700 bg-white/50 px-2 py-1 rounded shrink-0">{t('simulation')}</span>
+            </div>
+            <p className="text-sm text-orange-800 mb-3">{t('testControls')}</p>
+            <BuyGemsButton />
+          </div>
+        </div>
+
+        {/* Request more time - prominent secondary button */}
+        <div className="px-6 pb-6 text-center">
+          <button className="w-full py-3.5 bg-transparent border-2 border-teal-600 text-teal-700 font-bold rounded-xl active:scale-95 hover:bg-teal-50 transition-all flex items-center justify-center gap-2">
+            <Clock className="w-5 h-5 shrink-0" />
+            {t('requestTime')}
+          </button>
+        </div>
       </div>
     </div>
   );
