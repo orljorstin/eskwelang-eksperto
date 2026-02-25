@@ -58,7 +58,7 @@ export function ChildHomeScreenGood() {
           <div className="bg-white/10 backdrop-blur-md rounded-2xl px-5 py-4 flex items-center justify-between border border-white/10 shadow-lg shrink-0">
             <div className="flex items-center gap-2.5">
               <Clock className="w-6 h-6 text-teal-300 shrink-0" />
-              <span className="font-semibold text-white/90 text-lg whitespace-nowrap">{t('timeLeft')}: </span>
+              <span className="font-semibold text-white/90 text-lg whitespace-nowrap">{t('timeLeft')}:&nbsp;</span>
             </div>
             <div className="text-3xl font-bold tabular-nums text-teal-300 tracking-tight shrink-0">
               {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
