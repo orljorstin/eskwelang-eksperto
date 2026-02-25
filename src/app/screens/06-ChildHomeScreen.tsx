@@ -33,21 +33,21 @@ export function ChildHomeScreenGood() {
   return (
     <div className="h-full bg-gradient-to-br from-teal-50 via-blue-50 to-purple-50 flex flex-col overflow-y-auto">
       {/* Header - clear info about current session */}
-      <div className="bg-gray-900 border-b border-gray-700 text-white px-6 py-4 shadow-lg sticky top-0 z-10 relative overflow-hidden">
+      <div className="bg-gray-900 border-b border-gray-700 text-white px-6 pt-8 pb-6 shadow-xl sticky top-0 z-30 overflow-hidden">
         {/* Background decoration */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
           <div className="absolute top-[-50%] right-[-10%] w-64 h-64 bg-teal-600/40 rounded-full blur-3xl mix-blend-screen" />
           <div className="absolute bottom-[-50%] left-[-10%] w-64 h-64 bg-purple-600/40 rounded-full blur-3xl mix-blend-screen" />
         </div>
 
-        <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-xl shadow-inner border border-white/10">
+        <div className="relative z-10 flex flex-col gap-5">
+          <div className="flex items-center gap-4 mt-2">
+            <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-2xl shadow-inner border border-white/10">
               👦
             </div>
             <div className="flex-1">
-              <h1 className="text-xl font-bold">{t('hi')}, Miguel!</h1>
-              <div className="flex items-center gap-2 text-teal-400 text-sm">
+              <h1 className="text-2xl font-bold tracking-tight">{t('hi')}, Miguel!</h1>
+              <div className="flex items-center gap-1.5 text-teal-300 text-sm mt-1 font-medium bg-white/5 w-fit px-2.5 py-1 rounded-full border border-white/10">
                 <GraduationCap className="w-4 h-4" />
                 <span>{t('schoolMode')}</span>
               </div>
@@ -55,12 +55,12 @@ export function ChildHomeScreenGood() {
           </div>
 
           {/* Timer - prominent, clear */}
-          <div className="bg-white/5 backdrop-blur-sm rounded-xl px-4 py-3 flex items-center justify-between border border-white/10">
-            <div className="flex items-center gap-2">
-              <Clock className="w-5 h-5 text-teal-400" />
-              <span className="font-semibold">{t('timeLeft')}:</span>
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl px-5 py-4 flex items-center justify-between border border-white/10 shadow-lg">
+            <div className="flex items-center gap-2.5">
+              <Clock className="w-6 h-6 text-teal-300" />
+              <span className="font-semibold text-white/90 text-lg">{t('timeLeft')}:</span>
             </div>
-            <div className="text-2xl font-bold tabular-nums text-teal-300">
+            <div className="text-3xl font-bold tabular-nums text-teal-300 tracking-tight">
               {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
             </div>
           </div>
