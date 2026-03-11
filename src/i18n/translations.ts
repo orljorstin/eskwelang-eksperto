@@ -115,7 +115,7 @@ export const translations = {
         selectLanguage: "Select language",
         applyChanges: "Apply changes",
         protectionSettings: "Protection settings",
-        launcherSettings: "Launcher settings",
+        launcherSettings: "Launcher Settings",
         appRestrictions: "App restrictions & modes",
         spendingProtection: "Spending Protection",
         purchaseLimits: "Purchase limits",
@@ -141,12 +141,23 @@ export const translations = {
         logout: "Logout",
 
         // Support
-        helpSupport: "Help & support",
-        questionsAndHelp: "Questions and help",
+        helpSupport: "Help & Support",
+        questionsAndHelp: "Questions and Help",
         needHelp: "Need help?",
         hereToHelp: "We’re here to help.",
         chatSupport: "Chat support",
         frequentlyAskedQuestions: "Frequently Asked Questions",
+
+        // Additional
+        profileTip: "Tip: Create a profile for each person using the phone.",
+        faq1Q: "How do I add a child?",
+        faq1A: "Go to 'Manage Profiles' and click 'Add Child'. Enter the name, age, and choose an avatar.",
+        faq2Q: "How do I set a spending limit?",
+        faq2A: "From the Dashboard or Settings, select 'Load Protection'. Adjust the weekly limit slider and turn on PIN protection if desired.",
+        faq3Q: "What is the Parent PIN?",
+        faq3A: "This is the 4-digit code needed to access settings, approve purchases, and exit Child Mode.",
+        faq4Q: "Can I use it offline?",
+        faq4A: "Yes! Eskwela is 'Offline-First'. All settings and profiles are saved on your device and will sync when you are online.",
 
         // Errors
         pinMismatch: "PINs do not match",
@@ -273,7 +284,7 @@ export const translations = {
         selectLanguage: "Select language",
         applyChanges: "Apply changes",
         protectionSettings: "Protection settings",
-        launcherSettings: "Launcher settings",
+        launcherSettings: "Launcher Settings",
         appRestrictions: "App restrictions & modes",
         spendingProtection: "Spending Protection",
         purchaseLimits: "Purchase limits",
@@ -281,7 +292,7 @@ export const translations = {
         howToUse: "Paano Gamitin?",
         tutorialFaq: "Tutorial & FAQ",
         advanced: "Advanced",
-        advancedSettings: "Advanced settings",
+        advancedSettings: "Advanced Settings",
         dangerZone: "Danger zone",
         dangerZoneSystem: "System info",
         systemInfo: "System info",
@@ -299,12 +310,23 @@ export const translations = {
         logout: "Logout",
 
         // Support
-        helpSupport: "Help & support",
-        questionsAndHelp: "Questions and help",
+        helpSupport: "Help & Support",
+        questionsAndHelp: "Questions and Help",
         needHelp: "Need help?",
         hereToHelp: "We’re here to help.",
         chatSupport: "Chat support",
         frequentlyAskedQuestions: "Frequently Asked Questions",
+
+        // Additional
+        profileTip: "Tip: Gumawa ng profile para sa bawat taong gumagamit ng phone.",
+        faq1Q: "Paano mag-add ng anak?",
+        faq1A: "Pumunta sa 'Manage Profiles' at i-click ang 'Add Child'. Ilagay ang pangalan, edad, at pumili ng avatar.",
+        faq2Q: "Paano i-set ang spending limit?",
+        faq2A: "Sa Dashboard o Settings, piliin ang 'Load Protection'. I-adjust ang weekly limit slider at i-on ang PIN protection kung gusto.",
+        faq3Q: "Ano ang Parent PIN?",
+        faq3A: "Ito ang 4-digit code na kailangan para buksan ang settings, mag-approve ng purchases, at lumabas sa Child Mode.",
+        faq4Q: "Pwede bang gamitin offline?",
+        faq4A: "Oo! Ang Eskwela ay 'Offline-First'. Lahat ng settings at profiles ay naka-save sa iyong device at mag-sy-sync kapag online ka na.",
 
         // Errors
         pinMismatch: "Hindi magkatugma ang mga PIN",
@@ -464,6 +486,17 @@ export const translations = {
         chatSupport: "Chat support",
         frequentlyAskedQuestions: "Kanunay nga Gipangutana (FAQ)",
 
+        // Additional
+        profileTip: "Tip: Paghimo og profile para sa matag tawo nga naggamit sa phone.",
+        faq1Q: "Unsaon pagdugang og anak?",
+        faq1A: "Adto sa 'Manage Profiles' ug i-click ang 'Add Child'. Ibutang ang ngalan, edad, ug pagpili og avatar.",
+        faq2Q: "Unsaon pag-set sa spending limit?",
+        faq2A: "Sa Dashboard o Settings, pilia ang 'Load Protection'. I-adjust ang weekly limit slider ug i-on ang PIN protection kung gusto.",
+        faq3Q: "Unsa ang Parent PIN?",
+        faq3A: "Kini ang 4-digit code nga kinahanglan aron maablihan ang settings, mo-approve og purchases, ug mogawas sa Child Mode.",
+        faq4Q: "Pwede ba kini magamit offline?",
+        faq4A: "Oo! Ang Eskwela 'Offline-First'. Ang tanang settings ug profiles na-save sa imong device ug mag-sync kung online na ka.",
+
         // Errors
         pinMismatch: "Dili magkaparehas ang mga PIN",
         pinTooShort: "Ang PIN kinahanglan 4 ka numero pataas",
@@ -621,6 +654,17 @@ export const translations = {
         hereToHelp: "Uya kami para magtabang.",
         chatSupport: "Chat support",
         frequentlyAskedQuestions: "Parati na Pighahapot (FAQ)",
+
+        // Additional
+        profileTip: "Tip: Maghimo nin profile para sa lambang saro na naggagamit nin phone.",
+        faq1Q: "Pano magdugang nin aki?",
+        faq1A: "Dumanan ang 'Manage Profiles' asin i-click ang 'Add Child'. Ilaog ang pangaran, edad, asin magpili nin avatar.",
+        faq2Q: "Pano i-set ang spending limit?",
+        faq2A: "Sa Dashboard o Settings, pilion ang 'Load Protection'. I-adjust ang weekly limit slider asin i-on ang PIN protection kung gusto.",
+        faq3Q: "Ano ang Parent PIN?",
+        faq3A: "Ini ang 4-digit code na kaipuhan para mabuksan ang settings, mag-approve nin purchases, asin magluwas sa Child Mode.",
+        faq4Q: "Pwede daw ining gamiton offline?",
+        faq4A: "Iyo! Ang Eskwela 'Offline-First'. Ang gabos na settings asin profiles naka-save sa saimong device asin mag-o-online sync kapag may internet na.",
 
         // Errors
         pinMismatch: "Dai nagkaparehas ang mga PIN",

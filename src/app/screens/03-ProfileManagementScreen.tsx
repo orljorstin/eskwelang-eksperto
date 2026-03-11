@@ -228,7 +228,7 @@ export function ProfileManagementScreenGood() {
         {/* Helper text */}
         <div className="mt-6 bg-teal-50 border border-teal-200 rounded-lg p-4">
           <p className="text-sm text-teal-900">
-            <span className="font-medium">💡 Tip:</span> Gumawa ng profile para sa bawat taong gumagamit ng phone.
+            <span className="font-medium">💡 </span> {t('profileTip')}
           </p>
         </div>
       </div>

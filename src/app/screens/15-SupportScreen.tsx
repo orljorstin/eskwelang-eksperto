@@ -10,20 +10,20 @@ export function SupportScreen() {
 
     const faqs = [
         {
-            question: "Paano mag-add ng anak?",
-            answer: "Pumunta sa 'Manage Profiles' at i-click ang 'Add Child'. Ilagay ang pangalan, edad, at pumili ng avatar."
+            question: t('faq1Q'),
+            answer: t('faq1A')
         },
         {
-            question: "Paano i-set ang spending limit?",
-            answer: "Sa Dashboard o Settings, piliin ang 'Load Protection'. I-adjust ang weekly limit slider at i-on ang PIN protection kung gusto."
+            question: t('faq2Q'),
+            answer: t('faq2A')
         },
         {
-            question: "Ano ang Parent PIN?",
-            answer: "Ito ang 4-digit code na kailangan para buksan ang settings, mag-approve ng purchases, at lumabas sa Child Mode."
+            question: t('faq3Q'),
+            answer: t('faq3A')
         },
         {
-            question: "Pwede bang gamitin offline?",
-            answer: "Oo! Ang Eskwela ay 'Offline-First'. Lahat ng settings at profiles ay naka-save sa iyong device at mag-sy-sync kapag online ka na."
+            question: t('faq4Q'),
+            answer: t('faq4A')
         }
     ];
 
